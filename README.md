@@ -1,4 +1,4 @@
-#  Intelligent Attraction Platform
+#  Intelligent Attraction Platform（智慧景区平台）
 
 ## 讨论/设计
 > 智慧景区

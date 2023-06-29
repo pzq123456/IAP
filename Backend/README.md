@@ -19,6 +19,7 @@ cd Backend
 ```shell
 pip install -r requirements.txt
 ```
+
 ### 2. 运行
 ```shell
 uvicorn main:app --reload

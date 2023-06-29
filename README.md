@@ -8,6 +8,7 @@
 - [ ] 利用 E-R 图梳理项目实体关系
 - [ ] 详细讨论项目功能点（结合实体及关系），若有不合理或难实现的功能，需要及时调整
 - [ ] 编写前后端示例代码
+
 > - [ ] 运行[天气小组件](https://github.com/AsmrProg-YT/100-days-of-javascript)，并将其嵌入到前端页面中
 > - [ ] 查看 Threejs 渲染 DEM 的[样例代码](https://github.com/orabazu/threejs-dem-visualizer)，讨论三维视图的实现方式
 

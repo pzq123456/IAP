@@ -11,7 +11,8 @@
   },
   "dependencies": {
     "element-plus": "^2.3.6",
-    "vue": "^3.3.4"
+    "vue": "^3.3.4",
+    "vue-router": "^4.2.2"
   },
   "devDependencies": {
     "@iconify-json/ep": "^1.1.10",

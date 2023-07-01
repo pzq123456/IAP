@@ -20,8 +20,14 @@
 pip install -r requirements.txt
 ```
 ### 2. 运行
+- 运行以下命令
+- 如果你的入口文件是 main.py，那么需要修改这里的 main 为你的入口文件名
 ```shell
-uvicorn main:app --reload
+uvicorn main:app --reload # 如果你的入口文件不是 main.py，那么需要修改这里的 main 为你的入口文件名
+```
+- 如果你的入口文件是 app/main.py，那么需要修改这里的 main 为 app.main
+```shell
+uvicorn app.main:app --reload  # 如果你的入口文件是 app/main.py，那么需要修改这里的 main 为 app.main
 ```
 ### 3. 查看自带的文档网页
 - 打开浏览器，访问 "http://127.0.0.1:8000/docs" 即可查看自带的文档网页。
@@ -37,6 +43,30 @@ uvicorn main:app --reload
 ## Tutorial
 > - [tutorial](https://christophergs.com/tutorials/ultimate-fastapi-tutorial-pt-1-hello-world/)
 > - 我会首先阅读上述教程，然后提炼出我们需要的内容，写在这里
+
+### 0.项目结构
+> - 原教程循序渐进，逐步引入依赖，项目结构的复杂性也随之递增。
+> - 为了便于上手，我们先不引入数据库，而是用内存（Python 中的表）来模拟数据库。数据库的部分根据项目进度决定是这学期引入，还是留作暑假作业。
+- 项目文件结构及注释
+    ```shell
+    .
+    ├── app
+    │   ├── __init__.py
+    │   ├── data.py # 模拟数据库
+    │   ├── main.py # 入口文件
+    │   ├── schemas.py # 数据模型
+    ├── README.md
+    └── requirements.txt
+    ```
+    - 以上就是目前我们的项目结构。 
+    - `data.py` 中使用 python 中的表来模拟数据库，`schemas.py` 中定义数据模型，`main.py` 中定义路由。目前还不涉及数据库部分，但是现在做的工作都是为了后面引入数据库做准备（数据模型设计好了，路由也设计好了，只需要修改 `data.py` 中的内容即可）。
+- 接下来的任务：7.3 日下午
+  - [ ] 再次讨论数据模型的设计，暂时定下基础的数据模型
+  - [ ] 设计数据模型的属性及英文名称，写在 `schemas.py` 中
+  - [ ] 根据数据模型手工设计数据表，写在 `data.py` 中
+  - [ ] 设计路由，写在 `main.py` 中
+  - [ ] 测试路由访问 `http://127.0.0.1:8000/docs`，查看自带的文档网页
+  - 也可以自行阅读英文教程，了解更多内容
 
 ### 1. 利用 `pydantic` 定义数据模型
 - `pydantic` 是一个数据验证库，可以用来定义数据模型。我们可以优先使用它来设计数据模型。
@@ -65,5 +95,4 @@ uvicorn main:app --reload
         spaces: int
         valet: bool
     ```
-> 任务：
-> - [ ] 
+

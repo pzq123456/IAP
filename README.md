@@ -3,7 +3,7 @@
 
 ## 计划
 ### 7.3 日下午需要完成的任务
-- [ ] 后段任务见[Backend/README.md](Backend/README.md)
+- [ ] 后端任务见[Backend/README.md](Backend/README.md)
 - [ ] 前端任务见[Frontend/README.md](Frontend/README.md)
 - [ ] 文档任务见[Docs/project.md](Docs/project.md)
 ### 6.29 日下午需要完成的任务

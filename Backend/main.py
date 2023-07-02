@@ -2,117 +2,100 @@ from enum import Enum
 
 from pydantic import BaseModel
 
-from fastapi import FastAPI, HTTPException, Path, Query
+from fastapi import FastAPI, HTTPException, Path, Query, File, UploadFile
+from fastapi.responses import HTMLResponse,FileResponse
+
+import uuid # 生成唯一标识符
 
 app = FastAPI()
 
-
-class Category(Enum):
-    TOOLS = "tools"
-    CONSUMABLES = "consumables"
-
-
-class Item(BaseModel):
+class Image(BaseModel):
+    UID: str
     name: str
-    price: float
-    count: int
-    id: int
-    category: Category
+    url: str
+    path: str
 
 
-items = {
-    0: Item(name="Hammer", price=9.99, count=20, id=0, category=Category.TOOLS),
-    1: Item(name="Pliers", price=5.99, count=20, id=1, category=Category.TOOLS),
-    2: Item(name="Nails", price=1.99, count=100, id=2, category=Category.CONSUMABLES),
-}
+IMAGELIST = [
+    {
+    "UID": "eaac40f5-18e9-11ee-85f0-782b46e7b138",
+    "name": "test.jpg",
+    "url": "http://10.18.15.96:8000/getimg/?UID=eaac40f5-18e9-11ee-85f0-782b46e7b138",
+    "path": "E:\\IAP\\Backend\\app\\tmp\\eaac40f5-18e9-11ee-85f0-782b46e7b138.jpg"
+    }
+]
+
+# 获取当前网址
+def get_host():
+    import socket
+    hostname = socket.gethostname()
+    ip = socket.gethostbyname(hostname)
+    return ip
+
+
+
+# 接受图片 生成唯一标识符 保存到本地
+# 并保存到本地 E:\IAP\Backend\app\tmp
+@app.post("/uploadimg/")
+async def create_upload_files(file: UploadFile = File(...)):
+    UID = str(uuid.uuid1())
+    contents = await file.read()
+    with open(f"E:\\IAP\\Backend\\app\\tmp\\{UID}.jpg", "wb") as f:
+        f.write(contents)
+    url = f"http://{get_host()}:8000/getimg/?UID={UID}"
+    path = f"E:\\IAP\\Backend\\app\\tmp\\{UID}.jpg"
+    img = Image(UID=UID, name=file.filename, url=url, path=path)
+    IMAGELIST.append(img)
+    return img
+
+# 根据唯一标识符获取图片
+@app.get("/getimg/")
+async def getimg(UID: str):
+    for img in IMAGELIST:
+        if img["UID"] == UID:
+            return FileResponse(img["path"])
+    raise HTTPException(status_code=404, detail="Item not found")
+
 
 
 @app.get("/")
-def index() -> dict[str, dict[int, Item]]:
-    return {"items": items}
+async def main():
+    content = """
+<body>
+<form action="/uploadimg/" enctype="multipart/form-data" method="post">
+<input name="file" type="file" multiple>
+<input type="submit">
+</form>
+</body>
+    """
+    return HTMLResponse(content=content)
 
 
-@app.get("/items/{item_id}")
-def query_item_by_id(item_id: int) -> Item:
-    if item_id not in items:
-        HTTPException(status_code=404, detail=f"Item with {item_id=} does not exist.")
-
-    return items[item_id]
 
 
-Selection = dict[
-    str, str | int | float | Category | None
-]  # dictionary containing the user's query arguments
+# @app.post("/files/")
+# async def create_files(files: list[bytes] = File()):
+#     return {"file_sizes": [len(file) for file in files]}
 
 
-@app.get("/items/")
-def query_item_by_parameters(
-    name: str | None = None,
-    price: float | None = None,
-    count: int | None = None,
-    category: Category | None = None,
-) -> dict[str, Selection | list[Item]]:
-    def check_item(item: Item):
-        """Check if the item matches the query arguments from the outer scope."""
-        return all(
-            (
-                name is None or item.name == name,
-                price is None or item.price == price,
-                count is None or item.count != count,
-                category is None or item.category is category,
-            )
-        )
+# @app.post("/uploadfiles/")
+# async def create_upload_files(files: list[UploadFile]):
 
-    selection = [item for item in items.values() if check_item(item)]
-    return {
-        "query": {"name": name, "price": price, "count": count, "category": category},
-        "selection": selection,
-    }
+#     return {"filenames": [file.filename for file in files]}
 
 
-@app.post("/")
-def add_item(item: Item) -> dict[str, Item]:
-    if item.id in items:
-        HTTPException(status_code=400, detail=f"Item with {item.id=} already exists.")
-
-    items[item.id] = item
-    return {"added": item}
-
-
-# We can place further restrictions on allowed arguments by using the Query and Path classes.
-# In this case we are setting a lower bound for valid values and a minimal and maximal length for the name.
-@app.put("/update/{item_id}")
-def update(
-    item_id: int = Path(ge=0),
-    name: str | None = Query(defaut=None, min_length=1, max_length=8),
-    price: float | None = Query(default=None, gt=0.0),
-    count: int | None = Query(default=None, ge=0),
-):
-    if item_id not in items:
-        HTTPException(status_code=404, detail=f"Item with {item_id=} does not exist.")
-    if all(info is None for info in (name, price, count)):
-        raise HTTPException(
-            status_code=400, detail="No parameters provided for update."
-        )
-
-    item = items[item_id]
-    if name is not None:
-        item.name = name
-    if price is not None:
-        item.price = price
-    if count is not None:
-        item.count = count
-
-    return {"updated": item}
-
-
-@app.delete("/delete/{item_id}")
-def delete_item(item_id: int) -> dict[str, Item]:
-
-    if item_id not in items:
-        raise HTTPException(
-            status_code=404, detail=f"Item with {item_id=} does not exist."
-        )
-
-    item = items.pop(item_id)
-    return {"deleted": item}
+# @app.get("/")
+# async def main():
+#     content = """
+# <body>
+# <form action="/files/" enctype="multipart/form-data" method="post">
+# <input name="files" type="file" multiple>
+# <input type="submit">
+# </form>
+# <form action="/uploadfiles/" enctype="multipart/form-data" method="post">
+# <input name="files" type="file" multiple>
+# <input type="submit">
+# </form>
+# </body>
+#     """
+#     return HTMLResponse(content=content)

@@ -1,14 +1,14 @@
-# element-plus-vite-starter
+#  Intelligent Attractions Platform (IAP) 前端项目
 
-> A starter kit for Element Plus with Vite
+## 任务
 
-- Preview: <https://vite-starter.element-plus.org>
-
-This is an example of on-demand element-plus with [unplugin-vue-components](https://github.com/antfu/unplugin-vue-components).
-
-> If you want to import all, it may be so simple that no examples are needed. Just follow [quickstart | Docs](https://element-plus.org/zh-CN/guide/quickstart.html) and import them.
-
-If you just want an on-demand import example `manually`, you can check [unplugin-element-plus/examples/vite](https://github.com/element-plus/unplugin-element-plus/tree/main/examples/vite).
+- [ ] 1. 天气小组件运行成功并封装为 Vue 组件
+- [ ] 2. 研究三维 DEM 可视化示例项目，商讨具体三维功能点
+- [ ] 3. 研究地图相册功能点，商讨具体前端实现方案
+- [ ] 4. 查看我之前基于百度地图 API 实现的地图留言板、前端动态地图等项目，商讨可复用的功能点
+- [ ] 5. 开始编写前端文档
+> - [ ] 运行[天气小组件](https://github.com/AsmrProg-YT/100-days-of-javascript)，并将其嵌入到前端页面中
+> - [ ] 查看 Threejs 渲染 DEM 的[样例代码](https://github.com/orabazu/threejs-dem-visualizer)，讨论三维视图的实现方式
 
 ## Project setup
 

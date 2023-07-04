@@ -61,6 +61,6 @@
   - 数据可视化：Echarts、Chart.js
   - 表格渲染：Ag-Grid
 - 后端：
-  - 后端框架：Flask + SQLAlchemy
+  - 后端框架：Fastapi + SQLAlchemy
   - 数据库：SQLite
 

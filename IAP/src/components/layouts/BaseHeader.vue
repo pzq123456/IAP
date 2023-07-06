@@ -27,5 +27,9 @@ import { toggleDark } from "~/composables";
         <i inline-flex i="dark:ep-moon ep-sunny" />
       </button>
     </el-menu-item>
+    <el-sub-menu index="5">
+      <template #title>test</template>
+      <el-menu-item index="5-1">test1</el-menu-item>
+    </el-sub-menu>
   </el-menu>
 </template>

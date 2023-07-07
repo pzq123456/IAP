@@ -37,6 +37,7 @@
       <template #title>Navigator Four</template>
     </el-menu-item>
   </el-menu>
+  
 </template>
 
 <script lang="ts" setup>

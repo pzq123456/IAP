@@ -1,6 +1,8 @@
 import { createApp } from "vue";
 import App from "./App.vue";
 import { router } from './router'
+import baiduMap from 'vue3-baidu-map-gl'
+
 // import "~/styles/element/index.scss";
 
 // import ElementPlus from "element-plus";
@@ -19,5 +21,9 @@ import "element-plus/theme-chalk/src/message.scss";
 
 const app = createApp(App);
 app.use(router);
+app.use(baiduMap, {
+    ak: 'zsuRD8fmHkCdmWzC84NDbsvwAiWBdCce',
+    plugins: ['TrackAnimation']
+  })
 // app.use(ElementPlus);
 app.mount("#app");

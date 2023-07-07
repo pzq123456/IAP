@@ -14,7 +14,8 @@
     "paths": {
       "~/*": ["src/*"]
     },
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "types": ["vue3-baidu-map-gl/volar"]
   },
   "vueCompilerOptions": {
     "target": 3

@@ -10,7 +10,6 @@ declare module 'vue' {
     BaseHeader: typeof import('./components/layouts/BaseHeader.vue')['default']
     BaseMap: typeof import('./components/map/BaseMap.vue')['default']
     BaseSide: typeof import('./components/layouts/BaseSide.vue')['default']
-    ElAside: typeof import('element-plus/es')['ElAside']
     ElButton: typeof import('element-plus/es')['ElButton']
     ElCard: typeof import('element-plus/es')['ElCard']
     ElCol: typeof import('element-plus/es')['ElCol']

@@ -9,9 +9,10 @@
           
             <BaseSide />
 
-          <el-main style="height: 100%">
+          <el-main >
             <router-view />
           </el-main>
+
         </el-container>
         
       </el-container>

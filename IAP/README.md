@@ -1,4 +1,8 @@
 #  Intelligent Attractions Platform (IAP) 前端项目
+> 参考资料
+> - Three.js 地形图参考代码: https://github.com/orabazu/threejs-dem-visualizer/tree/master
+> - Three.js 教程: https://threejs.org/manual/#zh/materials
+> - 百度地图api Vue 封装组件: https://yue1123.github.io/vue3-baidu-map-gl/
 
 ## 前端详细设计文档（用户界面搭建）
 前端设计思路。前端采用组件化的编写方式，我们将具体的小的功能内聚在某一个或某几个组件里，然后将这些组件组合在一个视图里以实现不同的工作流。例如，由于二维地图数据与三维 DEM 数据具有不同的特点，编辑分析也需要不同的方式。所以，我们将这对两种数据的操作分别抽象成不同的数据流，然后将这些数据流组合在一个视图里，以实现不同的功能。这样的设计思路可以使得我们的代码更加清晰，便于后期的维护与扩展。尤其是系统的拓展性方面，我们可以根据需要添加新的功能，而不需要对原有的代码进行修改。

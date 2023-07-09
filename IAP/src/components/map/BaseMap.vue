@@ -1,5 +1,5 @@
 <template>
-    <BMap @initd="handleInitd" :zoom="zoom">
+    <BMap @initd="handleInitd" :zoom="zoom" height="100%">
       <BControl style="display: flex;" :offset="{ x: 0, y: 0 }">
 
         <el-button @click="handleZoomOut" type="primary">缩小</el-button>

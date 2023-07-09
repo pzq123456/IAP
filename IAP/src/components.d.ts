@@ -39,6 +39,7 @@ declare module 'vue' {
     ElUpload: typeof import('element-plus/es')['ElUpload']
     HelloWorld: typeof import('./components/HelloWorld.vue')['default']
     Info: typeof import('./components/Info.vue')['default']
+    InfoMap: typeof import('./components/map/InfoMap.vue')['default']
     Login: typeof import('./components/Login.vue')['default']
     Logos: typeof import('./components/Logos.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']

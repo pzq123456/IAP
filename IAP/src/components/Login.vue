@@ -1,29 +1,53 @@
 <template>
 <div class="container">
-    <div class="header-text">
-        <h1>Login</h1>
-    </div>
-    <el-form :model="form"> 
+    <div class="signin" id="signin">
+        <h1 class="header-text">登 录</h1>
+        <el-form :model="signin"> 
         <el-form-item>
-            <el-input v-model="form.username" placeholder="UserName" type="UserName" class="input"></el-input>
+            <el-input v-model="signin.username" placeholder="UserName" type="UserName" class="input"></el-input>
         </el-form-item>
         <el-form-item>
-            <el-input v-model="form.password" placeholder="Password" type="Password" class="input" show-password></el-input>
+            <el-input v-model="signin.password" placeholder="Password" type="Password" class="input" show-password></el-input>
         </el-form-item>
         <el-form-item class="submit">
             <el-button type="primary" class="submit-button" @click="onSubmit">Login</el-button>
         </el-form-item>
-        
-    </el-form>
-
+        </el-form>
+        <h5>sign up</h5>
+        <button>sign up</button>
+    </div>
+    <div class="signup" id="signup">
+      <h1 class="header-text">注 册</h1>
+      <el-form :model="signup"> 
+        <el-form-item>
+            <el-input v-model="signup.email" placeholder="Email" type="Email" class="input"></el-input>
+        </el-form-item>
+        <el-form-item>
+            <el-input v-model="signup.username" placeholder="UserName" type="UserName" class="input"></el-input>
+        </el-form-item>
+        <el-form-item>
+            <el-input v-model="signup.password" placeholder="Password" type="Password" class="input" show-password></el-input>
+        </el-form-item>
+        <el-form-item class="submit">
+            <el-button type="primary" class="submit-button" @click="onSubmit">Login</el-button>
+        </el-form-item>
+      </el-form>
+      <h5>sign in</h5>
+    </div>
 </div>
+
 </template>
 
 <script setup lang="ts">
 import { reactive } from 'vue'
 
 // do not use same name with ref
-const form = reactive({
+const signin = reactive({
+  username: '',
+  password: '',
+})
+const signup = reactive({
+  email:'',
   username: '',
   password: '',
 })
@@ -31,9 +55,18 @@ const form = reactive({
 const onSubmit = () => {
   console.log('submit!')
 }
+var sign_in = document.getElementById('signin')!;
+const sign_up = document.getElementById('signup')!;
+
+function testit(){
+  sign_in.style.display="none";
+}
 </script>
 
 <style scoped>
+.signup{
+  display: none;
+}
 .container {
     border: 1px solid rgba(92, 93, 150, 0.789);
     border-radius: 8px;
@@ -50,7 +83,7 @@ const onSubmit = () => {
   text-align: center;
   color: rgb(94, 108, 125);
   width: 400px;
-  height: 200px;
+  height: 100px;
 }
 .input{
 

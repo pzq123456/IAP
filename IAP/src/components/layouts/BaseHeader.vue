@@ -4,21 +4,21 @@ import { toggleDark } from "~/composables";
 
 <template>
   <el-menu class="el-menu-demo" mode="horizontal">
-    <el-menu-item index="1">Element Plus</el-menu-item>
+    <el-menu-item index="1">智慧景区管理系统</el-menu-item>
     <el-sub-menu index="2">
-      <template #title>Workspace</template>
-      <el-menu-item index="2-1">item one</el-menu-item>
-      <el-menu-item index="2-2">item two</el-menu-item>
-      <el-menu-item index="2-3">item three</el-menu-item>
+      <template #title>功能视图</template>
+      <el-menu-item index="2-1">二维地图编辑视图</el-menu-item>
+      <el-menu-item index="2-2">三维地图查看</el-menu-item>
+      <el-menu-item index="2-3">数据图标视图</el-menu-item>
       <el-sub-menu index="2-4">
-        <template #title>item four</template>
-        <el-menu-item index="2-4-1">item one</el-menu-item>
-        <el-menu-item index="2-4-2">item two</el-menu-item>
-        <el-menu-item index="2-4-3">item three</el-menu-item>
+        <template #title>分析视图</template>
+        <el-menu-item index="2-4-1">一般矢量分析</el-menu-item>
+        <el-menu-item index="2-4-2">DEM 底形分析</el-menu-item>
+        <el-menu-item index="2-4-3">统计信息可视化与分析</el-menu-item>
       </el-sub-menu>
     </el-sub-menu>
     <el-menu-item index="3" disabled>Info</el-menu-item>
-    <el-menu-item index="4">Orders</el-menu-item>
+
     <el-menu-item h="full" @click="toggleDark()">
       <button
         class="border-none w-full bg-transparent cursor-pointer"
@@ -27,9 +27,5 @@ import { toggleDark } from "~/composables";
         <i inline-flex i="dark:ep-moon ep-sunny" />
       </button>
     </el-menu-item>
-    <el-sub-menu index="5">
-      <template #title>test</template>
-      <el-menu-item index="5-1">test1</el-menu-item>
-    </el-sub-menu>
   </el-menu>
 </template>

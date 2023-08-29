@@ -54,7 +54,7 @@ abstract class Geometry{
     abstract calculateMBR(): [number, number, number, number]; // 计算最小外包矩形 抽象函数需要每一个具体的类具体实现
     
     /**
-     * - 获取（当前）图形的属性信息数组
+     * - （不包含组成当前图形的底层图形的属性信息）获取（当前）图形的属性信息数组
      * - get properties array of geometry
      * @returns 返回属性信息数组
      */
@@ -176,7 +176,20 @@ export class MultiPoint extends Geometry{
     }
 
     /**
-     * - 以数列形式返回内部点列表
+     * 获取内部点的属性并以数组形式返回
+     */
+    getCorrinatesPropertyArray(): any[]{
+        let res = [];
+        for(let i = 0; i < this.coordinates.length; i++){
+            let tmp = this.coordinates[i].getPropertyArray();
+            res.push(tmp);
+        }
+        return res;
+    }
+
+
+    /**
+     * - (仅包含坐标不包含属性)以数列形式返回内部点列表
      * - return array which wrappers all of the points in it
      */
     toArray(): number[][] {

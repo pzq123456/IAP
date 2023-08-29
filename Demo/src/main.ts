@@ -52,6 +52,8 @@ function example1(){ // 绘制多点及其重心
   let icon = innerIcon(0);
   drawPoint2BLMap(mps.calculateCentroid(), map);
   drawMultiPoint2BLMap(mps, map, icon);
+  console.log(mps.getCorrinatesPropertyArray());
+  console.log(mps.toArray());
 }
 
 function example2(){ // 绘制三角网

@@ -1,6 +1,6 @@
 import { assert, expect, test } from 'vitest'
 
-import { round,ccw,ccwRobust,inCircleRobust, inCircle, fillIndexArray, calculateArrayShape } from '../packages/constants/Utils'
+import { round,ccw,ccwRobust,inCircleRobust, inCircle, fillIndexArray, calculateArrayShape, concatEL2DArray, subColumnInEL2DArray } from '../packages/constants/Utils'
 
 import { haversine, PlanePolygonArea } from '../packages/Distance'
 
@@ -138,4 +138,20 @@ test('intersectionPolygon', () => {
   let clipPolygon = [[150,150],[150,200],[200,200],[200,150]];
   let res = intersectionPolygon(polygon, clipPolygon);
   expect(res).toEqual([[150,162],[150,200],[200,200],[200,174]])
+})
+
+// concatArray
+test('concatArray', () => {
+
+  let array1 = [ [1,2,3], [4,5,6], [7,8,9] ];
+  let array2 = [ ['a','b','c'], ['d','e','f'], ['g','h','i'] ];
+  let res = concatEL2DArray(array1, array2);
+  expect(res).toEqual([[1,2,3,'a','b','c'], [4,5,6,'d','e','f'], [7,8,9,'g','h','i']])
+})
+
+// subColumnInEL2DArray
+test('subColumnInEL2DArray', () => {
+  let array = [[1,2,3,4],[4,5,6,5],[7,8,9,6]];
+  let res = subColumnInEL2DArray(array, [0,3]);
+  expect(res).toEqual([[1,4],[4,5],[7,6]])
 })

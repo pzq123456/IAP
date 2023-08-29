@@ -19,5 +19,5 @@
   ![项目](./imgs/项目.jpg)
   - 员工（Employee）：姓名（Name）、SSN（SSN）、性别（Sex）、出生日期（BirthDate）、所属部门（Department）、工作时间 ( {WorksON (Project,Hours) } )
   ![员工](./imgs/员工.jpg)
-  - （弱实体）依赖关系（Dependent）：员工（Employee）、依赖名称（DependentName）、性别（Sex）、出生日期（BirthDate）、与该员工的关系（Relationship）
+  - （弱实体）依赖关系（Dependent）：员工（Employee）、依赖名称（DependentName）、性别（Sex） 、出生日期（BirthDate）、与该员工的关系（Relationship）
   ![依赖关系](./imgs/依赖关系.jpg)

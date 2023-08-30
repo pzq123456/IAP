@@ -35,6 +35,8 @@ export function innerIcon(index: number, icons: string[] = myicons) {
  * 在 百度地图上 绘制点
  * @param point - 点或者经纬度数组 [lon, lat]
  * @param map - 百度地图实例
+ * @param icon - 图标
+ * @returns marker - 百度地图的 marker 对象
  */
 export function drawPoint2BLMap(point: Point | [lon:number,lat:number] , map: any, icon?: any ) {
     // let blPoint = new BMapGL.Point(point.lon, point.lat);
@@ -45,12 +47,13 @@ export function drawPoint2BLMap(point: Point | [lon:number,lat:number] , map: an
         let blPoint = Point.isPoint(point) ? new BMapGL.Point(point.lon, point.lat) : new BMapGL.Point(point[0], point[1]);
         let marker = new BMapGL.Marker(blPoint, {icon: icon});
         map.addOverlay(marker);
+        return marker;
     }else{
         let blPoint = Point.isPoint(point) ? new BMapGL.Point(point.lon, point.lat) : new BMapGL.Point(point[0], point[1]);
         let marker = new BMapGL.Marker(blPoint);
         map.addOverlay(marker);
+        return marker;
     }
-
 }
 
 /**
@@ -65,13 +68,18 @@ export function removeAllOverlay(map: any) {
  * 在 百度地图上 绘制多点
  * @param multiPoint - 多点
  * @param map - 百度地图实例
+ * @param icon - 图标
+ * @returns markers - 百度地图的 marker 对象数组
  */
 export function drawMultiPoint2BLMap(multiPoint: MultiPoint | Point[], map: any, icon?: any) {
     let points = MultiPoint.isMultiPoint(multiPoint) ? multiPoint.coordinates : multiPoint;
+    let markers = [];
     for (let i = 0; i < points.length; i++) {
         let point = points[i];
-        drawPoint2BLMap(point, map, icon);
+        let marker = drawPoint2BLMap(point, map, icon);
+        markers.push(marker);
     }
+    return markers;
 }
 
 export function drawRectangle2BLMap( rect : [minLon:number, minLat:number, maxLon:number, maxLat:number], map: any, style:Object = { strokeColor: "green", strokeWeight: 2, strokeOpacity: 0.5 }) {

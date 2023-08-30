@@ -10,6 +10,10 @@ import { PlanePolygonArea, SpherePolygonArea } from './packages/Distance.ts';
 import { cutPolygonByMBR, intersection, intersectionPolygon, pointInEdge } from './packages/CGUtils.ts';
 import { readDataFromGeoJSON } from './Abstract/MetaData.ts';
 import { example9 } from './function1.ts';
+import { example10 } from './function2.ts';
+
+
+
 
 declare const BMapGL: any;
 declare const BMapGLLib: any;
@@ -23,7 +27,9 @@ const myMBR1 = [
 
 // GL版命名空间为BMapGL
 // 按住鼠标右键，修改倾斜角和角度
-var map = new BMapGL.Map("allmap");    // 创建Map实例
+var map = new BMapGL.Map("allmap"); // 创建Map实例
+
+
 
 createToolBar(document.querySelector<HTMLDivElement>('#toolBar')!, [
   { name: 'Point', action: () =>  draw('marker')},
@@ -40,6 +46,7 @@ createToolBar(document.querySelector<HTMLDivElement>('#toolBar')!, [
   { name: '线段求交', action: () =>  example7()},
   { name: '点线关系', action: () =>  example8()},
   { name: 'k-means', action: () =>  example9(map)},
+  { name: '图文信息窗口', action: () =>  example10(map)},
   { name: 'clear', action: () =>  removeAllOverlay(map)},
   { name: 'update', action: () =>  {mps = updateData();}}
 ])
@@ -55,13 +62,10 @@ function example1(){ // 绘制多点及其重心
   let icon = innerIcon(0);
   drawPoint2BLMap(mps.calculateCentroid(), map);
   drawMultiPoint2BLMap(mps, map, icon);
-  // console.log(mps.toArray());
   let convexPoints = convexHull(createPointListFromArr(mps.toArray()));
   let ls = new LineString(convexPoints);
   let polygon = new Polygon([ls]);
   drawPolygon2BLMap(polygon, map);
-  // console.log(convexPoints);
-  // drawMultiPoint2BLMap(convexPoints, map);
 }
 
 function example2(){ // 绘制三角网

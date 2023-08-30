@@ -8,6 +8,8 @@ import { Delaunator, triangleCenter, Voronoi } from "./packages/Delaunay.ts"
 import { fillIndexArray } from './packages/constants/Utils.ts';
 import { PlanePolygonArea, SpherePolygonArea } from './packages/Distance.ts';
 import { cutPolygonByMBR, intersection, intersectionPolygon, pointInEdge } from './packages/CGUtils.ts';
+import { readDataFromGeoJSON } from './Abstract/MetaData.ts';
+import { example9 } from './function1.ts';
 
 declare const BMapGL: any;
 declare const BMapGLLib: any;
@@ -37,6 +39,7 @@ createToolBar(document.querySelector<HTMLDivElement>('#toolBar')!, [
   { name: '多边形求交', action: () =>  example6()},
   { name: '线段求交', action: () =>  example7()},
   { name: '点线关系', action: () =>  example8()},
+  { name: '读取数据', action: () =>  example9()},
   { name: 'clear', action: () =>  removeAllOverlay(map)},
   { name: 'update', action: () =>  {mps = updateData();}}
 ])
@@ -48,12 +51,17 @@ let ps = mockPoints(50, myMBR1);
 let mps = new MultiPoint(ps);
 
 function example1(){ // 绘制多点及其重心
-  removeAllOverlay(map)
+  removeAllOverlay(map);
   let icon = innerIcon(0);
   drawPoint2BLMap(mps.calculateCentroid(), map);
   drawMultiPoint2BLMap(mps, map, icon);
-  console.log(mps.getCorrinatesPropertyArray());
-  console.log(mps.toArray());
+  // console.log(mps.toArray());
+  let convexPoints = convexHull(createPointListFromArr(mps.toArray()));
+  let ls = new LineString(convexPoints);
+  let polygon = new Polygon([ls]);
+  drawPolygon2BLMap(polygon, map);
+  // console.log(convexPoints);
+  // drawMultiPoint2BLMap(convexPoints, map);
 }
 
 function example2(){ // 绘制三角网
@@ -185,6 +193,8 @@ function example8(){
   drawPoint2BLMap(inPoi, map, myIcon2);
   alert("outPoi: " + res1 + "\n" + "inPoi: " + res2);
 }
+
+
 
 function updateData() {
   let ps = mockPoints(50, myMBR1);

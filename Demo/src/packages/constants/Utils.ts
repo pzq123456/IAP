@@ -311,3 +311,26 @@ export function subColumnInEL2DArray(
     });
     return res;
 }
+/**
+ * 生成随机索引数组（不重复）
+ * @param length - 数组长度（自然数）
+ * @param num - 随机索引个数（自然数）
+ * @returns {number[]} - 随机索引数组
+ */
+export function randomIndexArray(
+    length: number,
+    num : number
+){
+    if (num > length) {
+        throw new Error("num must be less than length!");
+    }
+    
+    let res = [];
+    while(res.length < num) {
+        let tmp = Math.floor(Math.random() * length);
+        if (!res.includes(tmp)) {
+            res.push(tmp);
+        }
+    }
+    return res;
+}

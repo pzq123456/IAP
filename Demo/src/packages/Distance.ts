@@ -23,6 +23,13 @@ const RADIUS = sphere.a; // 地球半径
  * @returns {number} - 距离
  */
 export function haversine(from: Point | [lon1 : number ,lat1 : number] ,to: Point | [lon2 : number ,lat2 : number] ,unit: Units = "kilometers"): number {
+    // 若输入是数组则复制一份
+    if (Array.isArray(from)) {
+        from = [...from];
+    }
+    if (Array.isArray(to)) {
+        to = [...to];
+    }
     // 处理输入参数
     const coordinates1 = Array.isArray(from) ? from : from.to2DArray();
     const coordinates2 = Array.isArray(to) ? to : to.to2DArray();

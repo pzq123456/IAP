@@ -39,7 +39,7 @@ createToolBar(document.querySelector<HTMLDivElement>('#toolBar')!, [
   { name: '多边形求交', action: () =>  example6()},
   { name: '线段求交', action: () =>  example7()},
   { name: '点线关系', action: () =>  example8()},
-  { name: '读取数据', action: () =>  example9()},
+  { name: 'k-means', action: () =>  example9(map)},
   { name: 'clear', action: () =>  removeAllOverlay(map)},
   { name: 'update', action: () =>  {mps = updateData();}}
 ])

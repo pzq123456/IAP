@@ -34,7 +34,12 @@ function get_centroid(
  * [group2],...
  * ]
  */
-export function K_means(k,thresh,maxtime,points){
+export function K_means(
+    k: number,
+    thresh: number = 0.0001,
+    maxtime: number = 100,
+    points: number[][]
+){
     /*
     1.从样本中选择 K 个点作为初始质心（完全随机）
     2.计算每个样本到各个质心的距离，将样本划分到距离最近的质心所对应的簇中
@@ -43,61 +48,67 @@ export function K_means(k,thresh,maxtime,points){
         质心的位置变化小于指定的阈值（默认为 0.0001）;
         达到最大迭代次数
     */
+
+
     // 1.从样本中选择 K 个点作为初始质心（完全随机）
     let centroids = [];
     let len = points.length;
+    if(len < k){
+        console.log("样本数量小于分类数量");
+        return;
+    }
     let indexArray = randomIndexArray(len,k);
     indexArray.forEach((item) => {
         centroids.push(points[item]);
-    }
-    );
-    // 2.计算每个样本到各个质心的距离，将样本划分到距离最近的质心所对应的簇中
-    let groups = [];
-    for(let i = 0 ; i < k ; i++){
-        groups.push([]);
-    }
-    let flag = true;
-    let time = 0;
-    while(flag){
-        // 2.1 清空 groups
-        for(let i = 0 ; i < k ; i++){
-            groups[i] = [];
         }
-        // 2.2 计算每个样本到各个质心的距离，将样本划分到距离最近的质心所对应的簇中
+    );
+    
+    let dc = Infinity; // 两次聚类质心的变化距离
+    let times = 0; //迭代次数
+    let groups = []; //k groups
+    while(dc > thresh && times < maxtime){
+        
+        groups = [];
+        for(let i = 0 ; i < k ; i++){
+            groups.push([]);
+        }
+        // 2.计算每个样本到各个质心的距离，将样本划分到距离最近的质心所对应的簇中
         for(let i = 0 ; i < len ; i++){
             let min = Infinity;
             let min_index = 0;
             for(let j = 0 ; j < k ; j++){
-                let tmp = haversine(points[i],centroids[j]);
-                if(tmp < min){
-                    min = tmp;
+                let dis = haversine(points[i],centroids[j]);
+                if(dis < min){
+                    min = dis;
                     min_index = j;
                 }
             }
             groups[min_index].push(points[i]);
         }
-        // 2.3 计算每个簇内所有样本的均值，并使用该均值更新簇的质心
+
+        // 3.计算每个簇内所有样本的均值，并使用该均值更新簇的质心
         let new_centroids = [];
         for(let i = 0 ; i < k ; i++){
             new_centroids.push(get_centroid(groups[i]));
         }
-        // 2.4 判断是否达到终止条件
-        let max_dis = 0;
+
+        // 4.重复步骤 2 与 3 ，直到达到以下条件之一：
+            // 质心的位置变化小于指定的阈值（默认为 0.0001）;
+            // 达到最大迭代次数
+
+        // 将最大类间距离视作质心变化距离
+        dc = 0;
         for(let i = 0 ; i < k ; i++){
-            let tmp = haversine(centroids[i],new_centroids[i]);
-            if(tmp > max_dis){
-                max_dis = tmp;
+            let dis = haversine(centroids[i],new_centroids[i]);
+            if(dis > dc){
+                dc = dis;
             }
         }
-        if(max_dis < thresh){
-            flag = false;
-        }
+        
+        console.log(dc);
+        
         centroids = new_centroids;
-        time++;
-        if(time > maxtime){
-            flag = false;
-        }
+        times++;
     }
-
     return groups;
 }

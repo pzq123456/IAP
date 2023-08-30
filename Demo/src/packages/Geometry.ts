@@ -171,7 +171,15 @@ export class MultiPoint extends Geometry{
      * @param points 点坐标数组
      * @param args 属性信息
      */
-    constructor(points: Point[], ...args: any[]){
+    constructor(points: Point[] | number[][], ...args: any[]){
+        // 若传入的是二维数组 则转换为 Point 类型
+        if(points[0] instanceof Array){
+            let tmp = [];
+            for(let i = 0; i < points.length; i++){
+                tmp.push(new Point(points[i][0], points[i][1]));
+            }
+            points = tmp;
+        }
         super("MultiPoint", points, ...args);
     }
 

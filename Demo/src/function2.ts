@@ -1,7 +1,5 @@
-import { drawMultiPoint2BLMap, drawPoint2BLMap, drawPolygon2BLMap, innerIcon, removeAllOverlay } from "./helpers/BLDraw";
-import { LineString, MultiPoint, Polygon } from "./packages/Geometry";
-import { createPointListFromArr } from "./packages/MetaData";
-import { convexHull } from "./packages/Shell";
+import { drawPoint2BLMap, innerIcon, removeAllOverlay } from "./helpers/BLDraw";
+import { MultiPoint} from "./packages/Geometry";
 import { mockPoints } from "./tests/Mock";
 
 declare const BMapGL: any;

@@ -59,7 +59,7 @@ let mps = new MultiPoint(ps);
 
 function example1(){ // 绘制多点及其重心
   removeAllOverlay(map);
-  let icon = innerIcon(0);
+  let icon = innerIcon(3);
   drawPoint2BLMap(mps.calculateCentroid(), map);
   drawMultiPoint2BLMap(mps, map, icon);
   let convexPoints = convexHull(createPointListFromArr(mps.toArray()));

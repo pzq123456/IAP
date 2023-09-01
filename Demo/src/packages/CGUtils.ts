@@ -33,13 +33,14 @@ export function dot(a: [number,number], b: [number,number]): number {
 
 
 /**
- * （默认求交）内含投影的线段求交函数（计算开销大）
+ * （默认线段求交）内含投影的线段求交函数（计算开销大）
  * @param p1 - 二维向量(x1,y1) 默认认为`经纬度坐标`
  * @param p2 - 二维向量(x2,y2) 默认认为`经纬度坐标`
  * @param p3 - 二维向量(x3,y3) 默认认为`经纬度坐标`
  * @param p4 - 二维向量(x4,y4) 默认认为`经纬度坐标`
  * @param projectionFrom - 投影函数 （在求交之前对输入点投影） 默认为 convertToMercator
  * @param projectionTo - 投影函数 (在求交之后对输出点投影) 默认为 convertToWgs84
+ * @param isInfine - 是否视作无穷线段 默认为 false 有限线段
  * @returns {[number,number] | null} - 交点 或 null
  */
 export function intersection(
@@ -163,6 +164,12 @@ export function intersectionPolygon(clipPolygon: [number,number][], subjectPolyg
 
 
 
+/**
+ * 判断点是否在简单多边形内部（平面与经纬度坐标通用，多边形边界算作在内）
+ * @param point - [lon,lat]
+ * @param polygon - [[lon,lat],[lon,lat],...] （不含空洞）
+ * @returns - true if the point is inside the polygon
+ */
 export function PointInsidePolygon(point: [number,number], polygon: [number,number][]): boolean {
     let inside = false;
     for (let i = 0, j = polygon.length - 1; i < polygon.length; j = i++) {

@@ -1,7 +1,4 @@
 import 'https://cdn.jsdelivr.net/npm/chart.js';
-// "https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.2.1/chart.js" 
-// Create a class for the element
-
 declare var Chart: any;
 
 export class Yield extends HTMLElement {
@@ -17,29 +14,11 @@ export class Yield extends HTMLElement {
         this.labels = JSON.parse(this.labels);
         this.name = this.getAttribute('name');
 
-        // create canvas
         const canvas = document.createElement('canvas');
         canvas.setAttribute('id', 'myChart');
-
-        // create p
-        const p = document.createElement('p');
-        p.textContent = 'This is a custom p element.';
-        // Add the p element to the shadow root
-        shadow.appendChild(p);
-
-        // create image
-        const img = document.createElement('img');
-        img.alt = 'MDN';
-        img.src = 'logo.svg';
-        img.width = 32;
-        img.height = 32;
-
-        // Add the image to the shadow root
-        shadow.appendChild(img);
-
-        // Attach the created elements to the shadow dom
+        canvas.setAttribute('style', 'display: block; width: 400px; height: 400px;');
         shadow.appendChild(canvas);
-        // setup chart
+
         this.chart = setupChart(canvas, this.data, this.labels, this.name);
 
     }

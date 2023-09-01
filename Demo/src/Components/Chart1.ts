@@ -37,7 +37,6 @@ export class Yield extends HTMLElement {
         // Add the image to the shadow root
         shadow.appendChild(img);
 
-
         // Attach the created elements to the shadow dom
         shadow.appendChild(canvas);
         // setup chart

@@ -5,7 +5,7 @@ export class Post extends HTMLElement{
     super();
     // Create a shadow root
     const shadow = this.attachShadow({mode: 'open'});
-    // get text 
+    // get text
     this.text = this.getAttribute('text');
     // get imgURL
     this.imgURL = this.getAttribute('imgURL');

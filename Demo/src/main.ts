@@ -11,7 +11,7 @@ import { cutPolygonByMBR, intersection, intersectionPolygon, pointInEdge } from 
 import { readDataFromGeoJSON } from './Abstract/MetaData.ts';
 import { example9 } from './function1.ts';
 import { example10 } from './function2.ts';
-
+import * as Fun from './funs.ts'
 // components
 import { Yield } from './Components/Chart1.ts';
 import { Post } from './Components/Post.ts';
@@ -53,6 +53,10 @@ createToolBar(document.querySelector<HTMLDivElement>('#toolBar')!, [
   { name: 'k-means', action: () =>  example9(map)},
   { name: '图文信息窗口', action: () =>  example10(map)},
   { name: '组件', action: () =>  components1()}, 
+  { name: 'LM', action: () =>  Fun.function3()},
+  { name: 'zqy', action: () =>  Fun.function4()},
+  { name: 'LJY', action: () =>  Fun.function5()},
+  { name: 'QSF', action: () =>  Fun.function6()},
   { name: 'clear', action: () =>  removeAllOverlay(map)},
   { name: 'update', action: () =>  {mps = updateData();}}
 ])

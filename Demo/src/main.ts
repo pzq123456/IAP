@@ -14,9 +14,11 @@ import { example10 } from './function2.ts';
 
 // components
 import { Yield } from './Components/Chart1.ts';
+import { Post } from './Components/Post.ts';
 
 // Define the new element
 customElements.define('yield-info', Yield);
+customElements.define('post-card', Post);
 
 declare const BMapGL: any;
 declare const BMapGLLib: any;

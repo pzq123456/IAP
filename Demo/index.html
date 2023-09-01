@@ -10,7 +10,7 @@
   </head>
   <style>
     body{
-      background: linear-gradient(90deg, #0a4d50 0%, #047047 100%);
+      /* background: linear-gradient(90deg, #22dfec 0%, #0ee592 100%); */
     }
     .title{
       display: flex;
@@ -72,8 +72,9 @@
       color: #ffffff;
     }
     .map{
-      height: 1030px;
+      height: 500px;
       width: 100%;
+      /* width: 100%; */
     }
     /* 隐藏版权信息 */
     .BMap_cpyCtrl {
@@ -82,6 +83,11 @@
     .anchorBL img {
       display: none;
     }
+    #components{
+      height: 300px;
+      width: 600px;
+    }
+
   </style>
   <!-- <style src="./src/helpers/DrawingManager.min.css"></style> -->
   <link rel="stylesheet" href="./src/helpers/DrawingManager.min.css">
@@ -108,6 +114,22 @@
       </ul> -->
       <div class="map" id="allmap">
       </div>
+
+      <div id="components">
+        <yield-info 
+          data="[6.324077729,6.469937242,6.615796755,6.761656267,6.90751578,7.053375293,5.946300571,6.075002944,6.110244193,7.127886541]"
+          labels="[2005,2006,2007,2008,2009,2010,2011,2012,2013,2014]"
+          name="鹿泉市"
+          id="y"
+        ></yield-info>
+        <yield-info 
+        data="[6.324077729,6.469937242,6.615796755,6.761656267,6.90751578,7.053375293,5.946300571,6.075002944,6.110244193,7.127886541]"
+        labels="[2005,2006,2007,2008,2009,2010,2011,2012,2013,2014]"
+        name="鹿泉市"
+        id="y2"
+      ></yield-info>
+      </div>
+
       <footer>
         <h3>
           Powed by RVGeo &copy; 2023

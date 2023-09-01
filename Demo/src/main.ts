@@ -12,8 +12,11 @@ import { readDataFromGeoJSON } from './Abstract/MetaData.ts';
 import { example9 } from './function1.ts';
 import { example10 } from './function2.ts';
 
+// components
+import { Yield } from './Components/Chart1.ts';
 
-
+// Define the new element
+customElements.define('yield-info', Yield);
 
 declare const BMapGL: any;
 declare const BMapGLLib: any;
@@ -47,6 +50,7 @@ createToolBar(document.querySelector<HTMLDivElement>('#toolBar')!, [
   { name: '点线关系', action: () =>  example8()},
   { name: 'k-means', action: () =>  example9(map)},
   { name: '图文信息窗口', action: () =>  example10(map)},
+  { name: '组件', action: () =>  components1()}, 
   { name: 'clear', action: () =>  removeAllOverlay(map)},
   { name: 'update', action: () =>  {mps = updateData();}}
 ])
@@ -56,6 +60,25 @@ map.enableScrollWheelZoom(true);     //开启鼠标滚轮缩放
 // test data
 let ps = mockPoints(50, myMBR1);
 let mps = new MultiPoint(ps);
+
+function components1(
+  fatherContainer: HTMLDivElement = document.querySelector<HTMLDivElement>('#components')!
+){
+  const yieldInfo = document.createElement('yield-info');
+  yieldInfo.setAttribute('data', "[6.324077729,6.469937242,6.615796755,6.761656267,6.90751578,7.053375293,5.946300571,6.075002944,6.110244193,7.127886541]");
+  yieldInfo.setAttribute('labels', "[2005,2006,2007,2008,2009,2010,2011,2012,2013,2014]");
+  yieldInfo.setAttribute('name', 'test');
+  // set id
+  yieldInfo.setAttribute('id', 'yieldInfo');
+  // 设置 大小
+  yieldInfo.style.width = '100%';
+  yieldInfo.style.height = '100%';
+
+  fatherContainer.appendChild(yieldInfo);
+}
+
+
+
 
 function example1(){ // 绘制多点及其重心
   removeAllOverlay(map);

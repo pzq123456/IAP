@@ -26,3 +26,23 @@ export function GeoFeatures2Arr(features: any){
     });
     return arr;
 }
+
+/**
+ * 将无洞的 GeoPolygon 转换为多维数组
+ * @param features - GeoJSON 中的 features
+ * @returns - 多维数组
+ */
+export function GeoPolygons2SimpleArr(
+    features: any,
+){
+    let arr = features;
+    let polygons = [];
+    for(let i = 0 ; i < arr.length ; i++){
+        let polygon;
+        for(let j = 0 ; j < arr[i].length ; j++){
+            polygon = arr[i][j];
+        }
+        polygons.push(polygon);
+    }
+    return polygons;
+}

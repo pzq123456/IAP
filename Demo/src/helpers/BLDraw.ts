@@ -157,3 +157,12 @@ export function drawEdgeMap2BLMap(edgeMap: Map<number, number[][]>, map: any, st
         drawLineString2BLMap(value, map, style,close);
     }
 }
+
+export function drawSimplePolygon2Map(polygon: any[], map: any, style: Object = { strokeColor: "blue", strokeWeight: 2, strokeOpacity: 0.5}) {
+    let blPoints = [];
+    for (let i = 0; i < polygon.length; i++) {
+        blPoints.push(new BMapGL.Point(polygon[i][0], polygon[i][1]));
+    }
+    let blPolygon = new BMapGL.Polygon(blPoints, style);
+    map.addOverlay(blPolygon);
+}

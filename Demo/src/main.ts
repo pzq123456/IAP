@@ -9,10 +9,11 @@ declare const BMapGL: any;
 
 // =============初始化代码区域================ 
 const map = initMap(); // 初始化地图并返回地图实例
-map.setMapStyleV2({     
-  styleId: 'dbe14c2d25e7b5be5876be5de4fe5039'
-});
-// 注册组件
+// map.setMapStyleV2({     
+//   styleId: 'dbe14c2d25e7b5be5876be5de4fe5039'
+// });
+
+// 注册组件 
 
 const componentsArr = [
   ['yield-info', Yield],
@@ -40,6 +41,7 @@ createToolBar(document.querySelector<HTMLDivElement>('#toolBar')!, [
   { name: 'zqy', action: () =>  Fun.function4()},
   { name: 'LJY', action: () =>  Fun.function5()},
   { name: 'QSF', action: () =>  Fun.function6()},
+  { name: 'PZQ', action: () =>  Fun.function7(map)},
   { name: '组件', action: () =>  components1()},
   { name: '清除组件', action: () =>  removeComponents()},
   { name: 'toggle组件', action: () =>  toggleComponent()}
@@ -80,7 +82,8 @@ function initMap(){
 // GL版命名空间为BMapGL
 // 按住鼠标右键，修改倾斜角和角度
 var map = new BMapGL.Map("allmap"); // 创建Map实例
-  map.centerAndZoom(new BMapGL.Point(-105.7220660521329,39.0119712026557), 7);  // 初始化地图,设置中心点坐标和地图级别
+  map.centerAndZoom(new BMapGL.Point( -107.88471436035084,
+    38.666533188351195), 15);  // 初始化地图,设置中心点坐标和地图级别
   map.enableScrollWheelZoom(true);     //开启鼠标滚轮缩放
   return map;
 }

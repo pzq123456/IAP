@@ -118,22 +118,20 @@ export function SpherePolygonArea(
             coordinates[index] = item.to2DArray();
         });
     }
-
     // 计算球面多边形的面积
     let area = 0;
     let len = coordinates.length;
-
-    // 将经纬度转换为弧度
-    coordinates.forEach((item, index) => {
-        item.forEach((item2, index2) => {
-            coordinates[index][index2] = degreesToRadians(item2);
-        });
-    });
-    console.log(coordinates);
+    let radiusArr = [];
+    for(let i = 0 ; i < len ; i++){
+        let tmp = coordinates[i];
+        let r1 = degreesToRadians(tmp[1]);
+        let r2 = degreesToRadians(tmp[0]);
+        radiusArr.push([r1,r2]);
+    }
     for (let i = 0; i < len; i++) {
         let j = (i + 1) % len;
         let k = (i + 2) % len;
-        area += (coordinates[i][0] - coordinates[k][0]) * Math.sin(coordinates[j][1]);
+        area += (radiusArr[i][0] - radiusArr[k][0]) * Math.sin(radiusArr[j][1]);
     }
     area = (area * RADIUS * RADIUS) / 2;
     // 转换为指定单位

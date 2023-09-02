@@ -1,11 +1,14 @@
 import { GeoFeatures2Arr, GeoPolygons2SimpleArr, readDataFromGeoJSON } from "./Abstract/MetaData";
 import { drawMultiPoint2BLMap, drawSimplePolygon2Map, innerIcon } from "./helpers/BLDraw";
-import { loadBaiDuMap } from "./helpers/initMap";
 import { PointInsidePolygon } from "./packages/CGUtils";
+import { N2C, showColorLegend } from "./packages/Colors";
 import { SpherePolygonArea } from "./packages/Distance";
-import { LineString } from "./packages/Geometry";
-import { createPointListFromArr } from "./packages/MetaData";
 
+const color = [
+    "#00FF00",
+    "#0000FF",
+    "#FF0000",
+];
 /**
  * PZQ
  */
@@ -25,7 +28,6 @@ export function function7(
 
             let result = []; // 三个区域的兴趣点
             let D = []; // 游客密度 人/ km^2
-
             for(let i = 0; i < interests.length ; i++){
                 let temp = [];
                 let count = 0; // 兴趣点个数
@@ -37,21 +39,31 @@ export function function7(
                         count++;
                     }
                 }
+
                 let area = SpherePolygonArea(interests[i]);
                 console.log(area);
                 D.push(count / area);
                 result.push(temp);
             }
-            console.log(D);
 
             result.forEach((item) => {
                 drawMultiPoint2BLMap(item,map);
             });
 
+            interests.forEach((item,index) => {
+                drawSimplePolygon2Map(item,map,rapperColor(D[index],D));
+            })
+            showColorLegend(D,color);
+            console.log(D);
         });
-
-        for(let i = 0 ; i < simPolygons.length ; i++){
-            drawSimplePolygon2Map(simPolygons[i],map);
-        }
     });
+
+
 }
+
+
+function rapperColor(value:number, values:number[]){
+    let res = {fillColor: N2C(value,values,color) };
+    return res;
+}
+

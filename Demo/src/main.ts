@@ -3,6 +3,7 @@ import * as Fun from './funs.ts'
 // components
 import { Yield } from './Components/Chart1.ts';
 import { Post } from './Components/Post.ts';
+import { Flow } from './Components/Chart2.ts';
 
 
 declare const BMapGL: any;
@@ -17,7 +18,8 @@ const map = initMap(); // 初始化地图并返回地图实例
 
 const componentsArr = [
   ['yield-info', Yield],
-  ['post-card', Post]
+  ['post-card', Post],
+  ['flow-info', Flow],
 ] as [string, any][]; 
 
 registerComponents(componentsArr);
@@ -40,9 +42,10 @@ createToolBar(document.querySelector<HTMLDivElement>('#toolBar')!, [
   { name: 'LM', action: () =>  Fun.function3()},
   { name: 'zqy', action: () =>  Fun.function4()},
   { name: 'LJY', action: () =>  Fun.function5()},
-  { name: 'QSF', action: () =>  Fun.function6()},
+  { name: 'QSF', action: () =>  Fun.function6(map)},
   { name: 'PZQ', action: () =>  Fun.function7(map)},
   { name: '组件', action: () =>  components1()},
+  { name: '组件2', action: () =>  components2()},
   { name: '清除组件', action: () =>  removeComponents()},
   { name: 'toggle组件', action: () =>  toggleComponent()}
 ],10)
@@ -63,10 +66,26 @@ function components1(
   `
 }
 
+function components2(
+  fatherContainer: HTMLDivElement = document.querySelector<HTMLDivElement>('#components')!
+){
+  // 首先实例化组件
+  const flowInfo = new Flow([1,2,3,4,5,6,7,8,9,10],['2005','2006','2007','2008','2009','2010','2011','2012','2013','2014'],'test');
+
+  // 然后将组件添加到页面中
+  fatherContainer.appendChild(flowInfo);
+}
+
 function removeComponents(
   fatherContainer: HTMLDivElement = document.querySelector<HTMLDivElement>('#components')!
 ){
-  fatherContainer.innerHTML = ''
+  // 实例化 flow
+  const flowInfo = new Flow([100,20,33213,432,5,6,7,8,9,10],['2005','2006','2007','2008','2009','2010','2011','2012','2013','2014'],'test');
+
+  // 添加到页面中
+  fatherContainer.appendChild(flowInfo);
+
+
 }
 
 /**

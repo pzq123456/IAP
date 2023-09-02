@@ -1,5 +1,5 @@
 import { GeoFeatures2Arr, GeoPolygons2SimpleArr, readDataFromGeoJSON } from "./Abstract/MetaData";
-import { drawMultiPoint2BLMap, drawSimplePolygon2Map, innerIcon } from "./helpers/BLDraw";
+import { drawMultiPoint2BLMap, drawRoad2Map, drawSimplePolygon2Map, innerIcon } from "./helpers/BLDraw";
 import { PointInsidePolygon } from "./packages/CGUtils";
 import { N2C, showColorLegend } from "./packages/Colors";
 import { SpherePolygonArea } from "./packages/Distance";
@@ -58,10 +58,14 @@ export function function7(
         });
     });
 
-
 }
 
-
+/**
+ * 根据数值返回颜色(对象)
+ * @param value - 数值
+ * @param values - 数值范围(数组)
+ * @returns - 颜色对象
+ */
 function rapperColor(value:number, values:number[]){
     let res = {fillColor: N2C(value,values,color) };
     return res;

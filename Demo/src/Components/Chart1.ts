@@ -19,7 +19,7 @@ export class Yield extends HTMLElement {
         // canvas.setAttribute('style', 'display: block; width: 400px; height: 400px;');
         shadow.appendChild(canvas);
 
-        this.chart = setupChart(canvas, this.data, this.labels, this.name);
+        setupChart(canvas, this.data, this.labels, this.name);
 
     }
   }
@@ -31,7 +31,7 @@ function setupChart(canvas, data, labels, name) {
         data: {
             labels: labels,
             datasets: [{
-                label: 'Yield',
+                label: '游客人数',
                 backgroundColor: 'rgb(255, 99, 132)',
                 borderColor: 'rgb(255, 99, 132)',
                 data: data,
@@ -41,7 +41,7 @@ function setupChart(canvas, data, labels, name) {
             plugins: {
                 title: {
                   display: true,
-                  text: name+'-冬小麦年产量',
+                  text: name+'-逐小时人流量',
                     font: {
                         size: 20
                     },
@@ -52,7 +52,7 @@ function setupChart(canvas, data, labels, name) {
                     display: true,
                     title: {
                     display: true,
-                    text: '年份',
+                    text: '时间',
                     font: {
                         size: 10,
                         weight: 'bold',
@@ -65,7 +65,7 @@ function setupChart(canvas, data, labels, name) {
                     display: true,
                     title: {
                     display: true,
-                    text: '产量： 吨/公顷',
+                    text: '人流量： 人/小时',
                     font: {
                         size: 10,
                         style: 'normal',

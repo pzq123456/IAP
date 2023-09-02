@@ -166,3 +166,36 @@ export function drawSimplePolygon2Map(polygon: any[], map: any, style: Object = 
     let blPolygon = new BMapGL.Polygon(blPoints, style);
     map.addOverlay(blPolygon);
 }
+
+export function drawRoad2Map(
+    nodes: [number, number][], // 节点
+    edges: [number, number, number][], // 起点 终点 权重
+    hightlight: number[], // 高亮的边
+    map: any,
+    nodeIcon: any = innerIcon(0),
+    roadStyle: Object = { strokeColor: "blue", strokeWeight: 2, strokeOpacity: 0.5},
+    hightlightStyle: Object = { strokeColor: "yellow", strokeWeight: 5, strokeOpacity: 0.5}
+){
+    // 绘制节点
+    for(let i = 0; i < nodes.length; i++){
+        drawPoint2BLMap(nodes[i],map,nodeIcon);
+    }
+
+    // 绘制边
+    for(let i = 0; i < edges.length; i++){
+        let edge = edges[i];
+        let start = nodes[edge[0]];
+        let end = nodes[edge[1]];
+        let style = hightlight.includes(i) ? hightlightStyle : roadStyle;
+        drawLineString2BLMap([start,end],map,style);
+    }
+
+    // 若有高亮边，则绘制高亮边
+    if(hightlight.length > 0){
+        let hightlightEdges = [];
+        for(let i = 0; i < hightlight.length; i++){
+            hightlightEdges.push(edges[hightlight[i]]);
+        }
+        drawEdgeMap2BLMap(new Map([[0,hightlightEdges]]),map,hightlightStyle);
+    }
+}

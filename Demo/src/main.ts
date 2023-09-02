@@ -1,24 +1,25 @@
 import { createToolBar } from './helpers/toolBar.ts'
 import * as Fun from './funs.ts'
-
 // components
 import { Yield } from './Components/Chart1.ts';
 import { Post } from './Components/Post.ts';
 
-// // Define the new element
-// customElements.define('yield-info', Yield);
-// customElements.define('post-card', Post);
 
 declare const BMapGL: any;
-declare const BMapGLLib: any;
 
-const map = initMap();
+// =============初始化代码区域================ 
+const map = initMap(); // 初始化地图并返回地图实例
+map.setMapStyleV2({     
+  styleId: 'dbe14c2d25e7b5be5876be5de4fe5039'
+});
+// 注册组件
+
 const componentsArr = [
   ['yield-info', Yield],
   ['post-card', Post]
-] as [string, any][];
-registerComponents(componentsArr);
+] as [string, any][]; 
 
+registerComponents(componentsArr);
 createToolBar(document.querySelector<HTMLDivElement>('#toolBar')!, [
   // { name: 'Point', action: () =>  draw('marker')},
   // { name: 'Polyline', action: () =>  draw('polyline')},
@@ -35,13 +36,17 @@ createToolBar(document.querySelector<HTMLDivElement>('#toolBar')!, [
   // { name: '点线关系', action: () =>  example8()},
   // { name: 'k-means', action: () =>  example9(map)},
   // { name: '图文信息窗口', action: () =>  example10(map)},
-  { name: '组件', action: () =>  components1()},
   { name: 'LM', action: () =>  Fun.function3()},
   { name: 'zqy', action: () =>  Fun.function4()},
   { name: 'LJY', action: () =>  Fun.function5()},
   { name: 'QSF', action: () =>  Fun.function6()},
+  { name: '组件', action: () =>  components1()},
+  { name: '清除组件', action: () =>  removeComponents()},
+  { name: 'toggle组件', action: () =>  toggleComponent()}
 ],10)
+// =============END================ 
 
+// =============功能函数区域================
 
 function components1(
   fatherContainer: HTMLDivElement = document.querySelector<HTMLDivElement>('#components')!
@@ -56,21 +61,33 @@ function components1(
   `
 }
 
+function removeComponents(
+  fatherContainer: HTMLDivElement = document.querySelector<HTMLDivElement>('#components')!
+){
+  fatherContainer.innerHTML = ''
+}
+
+/**
+ * 调整样式以打开组件
+ */
+function toggleComponent(
+  fatherContainer: HTMLDivElement = document.querySelector<HTMLDivElement>('#components')!
+){
+    fatherContainer.style.display = fatherContainer.style.display === 'none' ? 'block' : 'none';
+}
+
 function initMap(){
 // GL版命名空间为BMapGL
 // 按住鼠标右键，修改倾斜角和角度
 var map = new BMapGL.Map("allmap"); // 创建Map实例
-map.centerAndZoom(new BMapGL.Point(-105.7220660521329,39.0119712026557), 8);  // 初始化地图,设置中心点坐标和地图级别
-map.enableScrollWheelZoom(true);     //开启鼠标滚轮缩放
-return map;
+  map.centerAndZoom(new BMapGL.Point(-105.7220660521329,39.0119712026557), 7);  // 初始化地图,设置中心点坐标和地图级别
+  map.enableScrollWheelZoom(true);     //开启鼠标滚轮缩放
+  return map;
 }
 
 function registerComponents(
   componentsArr: [string, any][]
 ){
-  // // Define the new element
-  // customElements.define('yield-info', Yield);
-  // customElements.define('post-card', Post);
   componentsArr.forEach(([name, component]) => {
     customElements.define(name, component);
   })

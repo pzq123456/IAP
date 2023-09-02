@@ -21,7 +21,7 @@ const myMBR1 = [
 let ps = mockPoints(50, myMBR1);
 let mps = new MultiPoint(ps);
 
-function example1(){ // 绘制多点及其重心
+  function example1(){ // 绘制多点及其重心
     removeAllOverlay(map);
     let icon = innerIcon(3);
     drawPoint2BLMap(mps.calculateCentroid(), map);

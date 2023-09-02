@@ -1,3 +1,6 @@
+/**
+ * 业务代码索引
+ */
 import { function3 } from './function3';
 import { function4 } from './function4';
 import { function5 } from './function5';

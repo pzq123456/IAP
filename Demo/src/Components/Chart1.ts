@@ -16,7 +16,7 @@ export class Yield extends HTMLElement {
 
         const canvas = document.createElement('canvas');
         canvas.setAttribute('id', 'myChart');
-        canvas.setAttribute('style', 'display: block; width: 400px; height: 400px;');
+        // canvas.setAttribute('style', 'display: block; width: 400px; height: 400px;');
         shadow.appendChild(canvas);
 
         this.chart = setupChart(canvas, this.data, this.labels, this.name);

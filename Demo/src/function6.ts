@@ -24,16 +24,6 @@ export function function6(){
     console.log(length) //20
 }
 
-// let points = [
-//     [0,0], // 0
-//     [1,1], // 1
-//     [2,2], // 2
-// ]
-
-// let edges = [
-//     [0,1,1] , // 0
-//     [1,2,10] , // 1
-// ]
 
 
 

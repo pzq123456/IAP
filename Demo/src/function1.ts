@@ -5,7 +5,7 @@ import { haversine } from "./packages/Distance";
 import { LineString, MultiPoint, Polygon } from "./packages/Geometry";
 import { convexHull } from "./packages/Shell";
 import { randomIndexArray } from "./packages/constants/Utils";
-
+// k-means
 export function example9(map: any){
     readDataFromGeoJSON("points.json").then((res) => {
         let arr = GeoFeatures2Arr(res.data.features);

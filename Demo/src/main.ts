@@ -71,7 +71,6 @@ function components2(
 ){
   // 首先实例化组件
   const flowInfo = new Flow([1,2,3,4,5,6,7,8,9,10],['2005','2006','2007','2008','2009','2010','2011','2012','2013','2014'],'test');
-
   // 然后将组件添加到页面中
   fatherContainer.appendChild(flowInfo);
 }
@@ -79,13 +78,8 @@ function components2(
 function removeComponents(
   fatherContainer: HTMLDivElement = document.querySelector<HTMLDivElement>('#components')!
 ){
-  // 实例化 flow
-  const flowInfo = new Flow([100,20,33213,432,5,6,7,8,9,10],['2005','2006','2007','2008','2009','2010','2011','2012','2013','2014'],'test');
-
-  // 添加到页面中
-  fatherContainer.appendChild(flowInfo);
-
-
+  // 从页面中移除所有组件
+  fatherContainer.innerHTML = '';
 }
 
 /**

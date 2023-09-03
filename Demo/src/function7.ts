@@ -1,4 +1,5 @@
 import { GeoFeatures2Arr, GeoPolygons2SimpleArr, readDataFromGeoJSON } from "./Abstract/MetaData";
+import { Flow } from "./Components/Chart2";
 import { drawMultiPoint2BLMap, drawRoad2Map, drawSimplePolygon2Map, innerIcon } from "./helpers/BLDraw";
 import { PointInsidePolygon } from "./packages/CGUtils";
 import { N2C, showColorLegend } from "./packages/Colors";
@@ -58,6 +59,7 @@ export function function7(
         });
     });
 
+    addCom2Page();
 }
 
 /**
@@ -71,3 +73,13 @@ function rapperColor(value:number, values:number[]){
     return res;
 }
 
+function addCom2Page(
+    fatherContainer: HTMLDivElement = document.querySelector<HTMLDivElement>('#components')!,
+    data: number[],
+    labels: string[],
+  ){
+    // 首先实例化组件
+    const flowInfo = new Flow([1,2,3],['A','B','C'],'test');
+    // 然后将组件添加到页面中
+    fatherContainer.appendChild(flowInfo);
+  }

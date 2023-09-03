@@ -11,21 +11,25 @@ export class Flow extends HTMLElement {
     ) {
         // Always call super first in constructor
         super();
-        // Create a shadow root
-        const shadow = this.attachShadow({mode: 'open'});
-        // get data
+        // 使用 template 的 innerHTML 設定樣板
+        this.innerHTML = `
+        <div class="chart-container" style="position: relative; height:400px; width:450px">
+            <canvas id="myChart"></canvas>
+        </div>
+        `;
+
         this.data = data;
         this.labels = labels;
         this.name = name;
-        // In my case the canvas needed to be wrapped inside an element with the CSS display: block;
-
-        const wrapper = document.createElement('div');
-        wrapper.setAttribute('style', 'display: block; width: 400px; height: 400px;');
-        const canvas = document.createElement('canvas');
-        canvas.setAttribute('id', 'myChart');
-        wrapper.appendChild(canvas);
-        shadow.appendChild(wrapper);
-
+    }
+    /**
+     * 挂载到 DOM 时被调用
+     */
+    connectedCallback() {
+        let data = this.data;
+        let labels = this.labels;
+        let name = this.name;
+        let canvas = this.querySelector('#myChart');
         let chart = new Chart(canvas, {
             type: 'line',
             data: {

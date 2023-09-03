@@ -55,11 +55,11 @@ export function function7(
                 drawSimplePolygon2Map(item,map,rapperColor(D[index],D));
             })
             showColorLegend(D,color);
-            console.log(D);
+            addCom2Page(document.querySelector<HTMLDivElement>('#components')!,D,['A','B','C']);
         });
     });
 
-    addCom2Page();
+
 }
 
 /**
@@ -79,7 +79,7 @@ function addCom2Page(
     labels: string[],
   ){
     // 首先实例化组件
-    const flowInfo = new Flow([1,2,3],['A','B','C'],'test');
+    const flowInfo = new Flow(data,['A','B','C'],'逐地点');
     // 然后将组件添加到页面中
     fatherContainer.appendChild(flowInfo);
   }

@@ -58,7 +58,7 @@ function getMaxMin(arr:number[]){
 export function showColorLegend(
     values:number[] = evenValue(),
     colors:string[] = Colors,
-    fatherContainer: HTMLDivElement = document.querySelector<HTMLDivElement>('#components')!
+    fatherContainer: HTMLDivElement = document.querySelector<HTMLDivElement>('.Legend')!
 ){
     let {max,min} = getMaxMin(values);
     let unit = (max - min) / colors.length;
@@ -66,7 +66,9 @@ export function showColorLegend(
     for(let i = 0 ; i < colors.length ; i++){
         html += `<div style="display:flex;align-items:center">
             <div style="width:20px;height:20px;background-color:${colors[i]}"></div>
-            <div>${min + i * unit} ~ ${min + (i + 1) * unit}</div>
+            <div>${ 
+                (min + i * unit).toFixed(2)
+             } ~ ${ (min + (i + 1) * unit).toFixed(2) }</div>
         </div>`
     }
     html += `</div>`;

@@ -4,7 +4,7 @@ export class Dijkstra {
     /**
      * Djikstra算法
      * @param edges - ["a", "b", 7]
-     * @param source - "a"
+     * @param source - "a" 起点
      */
     constructor(
         edges: any[][],

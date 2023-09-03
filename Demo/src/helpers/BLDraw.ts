@@ -8,6 +8,7 @@
  */
 
 import { Point, MultiPoint, LineString, MultiLineString, Polygon } from '../packages/Geometry.ts';
+import { fillIndexArray } from '../packages/constants/Utils.ts';
 
 // disable ts error
 declare var BMapGL: any;
@@ -166,11 +167,22 @@ export function drawSimplePolygon2Map(polygon: any[], map: any, style: Object = 
     let blPolygon = new BMapGL.Polygon(blPoints, style);
     map.addOverlay(blPolygon);
 }
-
+/**
+ * 绘制道路
+ * @param nodes - 节点 
+ * @param edges - 起点 终点 权重
+ * @param hightlight - 高亮的边
+ * @param Source - 起点
+ * @param Target - 终点
+ * @param map - 百度地图实例
+ * @param nodeIcon - 中间的节点图标
+ * @param roadStyle - 道路样式
+ * @param hightlightStyle - 高亮样式
+ */
 export function drawRoad2Map(
     nodes: [number, number][], // 节点
     edges: [number, number, number][], // 起点 终点 权重
-    hightlight: number[], // 高亮的边
+    hightlight: number[], // 高亮节点 [0,1,2] ==> 0 --> 1 -->2
     map: any,
     nodeIcon: any = innerIcon(0),
     roadStyle: Object = { strokeColor: "blue", strokeWeight: 2, strokeOpacity: 0.5},
@@ -178,24 +190,23 @@ export function drawRoad2Map(
 ){
     // 绘制节点
     for(let i = 0; i < nodes.length; i++){
+        // 若是起点和终点则跳过
+        if(i === hightlight[0] || i === hightlight[hightlight.length - 1]) continue;
         drawPoint2BLMap(nodes[i],map,nodeIcon);
     }
-
-    // 绘制边
+    // 绘制路网
     for(let i = 0; i < edges.length; i++){
         let edge = edges[i];
         let start = nodes[edge[0]];
         let end = nodes[edge[1]];
-        let style = hightlight.includes(i) ? hightlightStyle : roadStyle;
-        drawLineString2BLMap([start,end],map,style);
+        drawLineString2BLMap([start,end],map,roadStyle);
     }
-
     // 若有高亮边，则绘制高亮边
     if(hightlight.length > 0){
-        let hightlightEdges = [];
-        for(let i = 0; i < hightlight.length; i++){
-            hightlightEdges.push(edges[hightlight[i]]);
-        }
-        drawEdgeMap2BLMap(new Map([[0,hightlightEdges]]),map,hightlightStyle);
+        let lineStrings = fillIndexArray(hightlight,nodes);
+        drawLineString2BLMap(lineStrings,map,hightlightStyle,false);
+        drawPoint2BLMap(lineStrings[0],map,innerIcon(1));
+        drawPoint2BLMap(lineStrings[lineStrings.length - 1],map,innerIcon(2));
     }
+
 }

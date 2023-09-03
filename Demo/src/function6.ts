@@ -1,12 +1,13 @@
 import { drawRoad2Map } from "./helpers/BLDraw";
 import { Dijkstra } from "./packages/Dijkstra";
+import { haversine } from "./packages/Distance";
 
 /**
  * QSF
  */
 export function function6(map: any){
-    // console.log("function6");
-    //Testing algorithm
+    console.log("function6");
+    // // Testing algorithm
     // let graph = []
     // graph.push([0, 1, 7])
     // graph.push([0, 2, 9])
@@ -17,13 +18,6 @@ export function function6(map: any){
     // graph.push([2, 5, 2])
     // graph.push([3, 4, 6])
     // graph.push([4, 5, 9])
-
-    // let dijkstra = new Dijkstra(graph, 0)
-
-    // let [path, length] = dijkstra.dijkstra(4)
-    // console.log(path) //[ 'a', 'c', 'f', 'e' ]
-    // console.log(length) //20
-
     const points = [
         [
             -108.09402257886713,
@@ -44,18 +38,36 @@ export function function6(map: any){
     ] as [number,number][];
 
     const edges = [
-        [0,1,10],
-        [1,2,10],
-        [2,3,10],
-        [3,0,10],
-        [0,2,10],
-        [1,3,10]
-    ] as [number,number,number][];
+        [0,1],
+        [1,2],
+        [2,3],
+        [0,3],
+        [0,2],
+    ] as [number,number][];
 
-    drawRoad2Map(points,edges,[0,1,2,3],map)
+    const EdgesWithWeight = addDistance2Edge(points,edges,haversine);
+    console.log(EdgesWithWeight);
+    let dijkstra = new Dijkstra(EdgesWithWeight, 2);
+    let [path, length] = dijkstra.dijkstra(0);
+    path as number[];
+    console.log(path);
+    drawRoad2Map(points,edges,path,map)
 }
 
-
-
+function addDistance2Edge(
+    points: [number,number][],
+    edges: [number,number][],
+    distance: ()=>number
+){
+    let newEdges = [];
+    for(let i = 0; i < edges.length; i++){
+        let edge = edges[i];
+        let start = points[edge[0]];
+        let end = points[edge[1]];
+        let dis = distance(start,end);
+        newEdges.push([edge[0],edge[1],dis]);
+    }
+    return newEdges;
+}
 
 

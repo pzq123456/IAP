@@ -1,6 +1,6 @@
 import 'https://cdn.jsdelivr.net/npm/chart.js';
 declare var Chart: any;
-export class Flow extends HTMLElement {
+export class About extends HTMLElement {
     data: number[];
     labels: string[];
     name: string;
@@ -17,9 +17,13 @@ export class Flow extends HTMLElement {
         this.innerHTML = `
         <div class="chart-container" style="position: relative; height:400px; width:500px">
             <canvas id="myChart"></canvas>
+            <button id="close">关闭</button>
         </div>
         `;
-
+        // 为按钮添加点击事件
+        // this.querySelector('#close')!.addEventListener('click', () => {
+        //     this.remove();
+        // });
         this.data = data;
         this.labels = labels;
         this.name = name;

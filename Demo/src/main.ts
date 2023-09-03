@@ -4,6 +4,7 @@ import * as Fun from './funs.ts'
 import { Yield } from './Components/Chart1.ts';
 import { Post } from './Components/Post.ts';
 import { Flow } from './Components/Chart2.ts';
+import { About } from './Components/About.ts';
 
 
 declare const BMapGL: any;
@@ -48,8 +49,9 @@ createToolBar(document.querySelector<HTMLDivElement>('#toolBar')!, [
   { name: '组件', action: () =>  components1()},
   { name: '组件2', action: () =>  components2()},
   { name: '清除组件', action: () =>  removeComponents()},
-  { name: 'toggle组件', action: () =>  toggleComponent()}
-],10)
+  { name: 'toggle组件', action: () =>  toggleComponent()},
+  { name: '关于', action: () =>  about()},
+],20)
 // =============END================ 
 
 // =============功能函数区域================
@@ -111,3 +113,17 @@ function registerComponents(
     customElements.define(name, component);
   })
 }
+
+function about(
+  fatherContainer: HTMLDivElement = document.querySelector<HTMLDivElement>('#components')!
+){
+  // 使用 dark图层 
+  let DarkLayer = document.querySelector<HTMLDivElement>('.DarkLayer')!;
+  console.log(DarkLayer);
+  DarkLayer.style.display = DarkLayer.style.display === 'block' ? 'none' : 'block';
+  // 创建组件
+  const flowInfo = new About([1,2,3,4,5,6,7,8,9,10],['2005','2006','2007','2008','2009','2010','2011','2012','2013','2014'],'test','时间');
+  // 然后将组件添加到页面中
+  fatherContainer.appendChild(flowInfo);
+}
+

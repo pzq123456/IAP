@@ -67,7 +67,8 @@ export class Dijkstra {
             // u
             let u = vertex_with_min_dist(Q, dist),
                 // 找到当前点的邻接点
-                neighbors = Object.keys(adj[u]).filter(v => Q.has(v)) //Neighbor still in Q 
+                // neighbors = Object.keys(adj[u]).filter(v => Q.has(v)) //Neighbor still in Q 
+                neighbors = Object.keys(adj[u]).map(v => parseInt(v)).filter(v => Q.has(v))
             Q.delete(u)
             // 找到终点就终止
             if (u === target) break //Break when the target has been found

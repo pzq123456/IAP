@@ -40,7 +40,7 @@ createToolBar(document.querySelector<HTMLDivElement>('#toolBar')!, [
   // { name: '点线关系', action: () =>  example8()},
   // { name: 'k-means', action: () =>  example9(map)},
   // { name: '图文信息窗口', action: () =>  example10(map)},
-  { name: 'LM', action: () =>  Fun.function3()},
+  { name: 'LM', action: () =>  Fun.function3(map)},
   { name: 'zqy', action: () =>  Fun.function4()},
   { name: 'LJY', action: () =>  Fun.function5()},
   { name: 'QSF', action: () =>  Fun.function6(map)},

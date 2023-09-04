@@ -21,6 +21,7 @@ const componentsArr = [
   ['yield-info', Yield],
   ['post-card', Post],
   ['flow-info', Flow],
+  ['about-info', About]
 ] as [string, any][]; 
 
 registerComponents(componentsArr);
@@ -117,6 +118,7 @@ function registerComponents(
 function about(
   fatherContainer: HTMLDivElement = document.querySelector<HTMLDivElement>('#components')!
 ){
+  fatherContainer.style.display = 'block' ;
   // 使用 dark图层 
   let DarkLayer = document.querySelector<HTMLDivElement>('.DarkLayer')!;
   console.log(DarkLayer);

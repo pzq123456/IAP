@@ -19,7 +19,9 @@ export function createIcon(url: string, size: [number, number], offset: [number,
     });
 }
 
-const myicons = ['greenStar.svg','bluePoint.svg','redPoint.svg','pinkPoint.svg']
+const myicons = [
+    'shop.png','shopg.png','shopy.png','shopr.png','greenStar.svg','bluePoint.svg','redPoint.svg','pinkPoint.svg',
+]
 
 
 export function innerIcon(index: number, icons: string[] = myicons) {

@@ -72,11 +72,12 @@ function addDistance2Edge(
     } 
     return newEdges;
 }
+
 function addComPaths(
     fatherContainer: HTMLDivElement = document.querySelector<HTMLDivElement>('#components')!
 ){
     // 首先实例化组件
-    const pathsCom=new PathsCom()
+    const pathsCom= new PathsCom(0,1);
     // 然后将组件添加到页面中
     fatherContainer.appendChild(pathsCom)
 }

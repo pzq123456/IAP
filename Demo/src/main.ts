@@ -21,12 +21,8 @@ const componentsArr = [
   ['yield-info', Yield],
   ['post-card', Post],
   ['flow-info', Flow],
-<<<<<<< HEAD
   ['about-info', About],
-  ['path-Com', PathsCom],
-=======
-  ['about-info', About]
->>>>>>> 040c9078e58b5cc8af1f5494fc79d3e587c1ce16
+  ['paths-info', PathsCom],
 ] as [string, any][]; 
 
 registerComponents(componentsArr);

@@ -1,92 +1,31 @@
 import 'https://cdn.jsdelivr.net/npm/chart.js';
 declare var Chart: any;
 export class About extends HTMLElement {
-    data: number[];
-    labels: string[];
-    name: string;
-    axisX: string;
+    member: string[][];
     constructor(
-        data: number[],
-        labels: string[],
-        name: string,
-        axisX: string = '地点',
+        member: string[],
     ) {
         // Always call super first in constructor
         super();
-        // 使用 template 的 innerHTML 設定樣板
-        this.innerHTML = `
-        <div class="chart-container" style="position: relative; height:400px; width:500px">
-            <canvas id="myChart"></canvas>
-            <button id="close">关闭</button>
-        </div>
-        `;
+        this.member = member;
+        let html = `<div style="display:flex;flex-direction:column"> <h1> 开发人员 </h1>`;
+        for(let i = 0 ; i < this.member.length ; i++){
+            html += `<div style="display:flex;align-items:center">
+                <img src="${this.member[i][2]}" style="width:100px;height:100px;border-radius:50%;
+                "></img>
+                <h3> ${ this.member[i][0] } </h3>
+            </div>`
+        }
+        html += `</div>`;
+        // add button 
+        html += `<button id="close" style="position:absolute;right:0;top:0;">X</button>`
+        this.innerHTML = html;
+
         // 为按钮添加点击事件
         this.querySelector('#close')!.addEventListener('click', () => {
             document.querySelector('#components')!.style.display = 'none';
             document.querySelector('.DarkLayer')!.style.display = 'none';
             this.remove();
-        });
-        this.data = data;
-        this.labels = labels;
-        this.name = name;
-        this.axisX = axisX;
-    }
-    /**
-     * 挂载到 DOM 时被调用
-     */
-    connectedCallback() {
-        let data = this.data;
-        let labels = this.labels;
-        let name = this.name;
-        let axisX = this.axisX;
-        let canvas = this.querySelector('#myChart');
-        let chart = new Chart(canvas, {
-            type: 'line',
-            data: {
-                labels: labels,
-                datasets: [{
-                    label: '游客人数',
-                    data: data,
-                }]
-            },
-            options: {
-                responsive: true,
-                plugins: {
-                    title: {
-                        display: true,
-                        text: name+'-人流量',
-                        font: {
-                            size: 20,
-                        },
-                    }
-                },
-                scales: {
-                    x: {
-                        display: true,
-                        title: {
-                        display: true,
-                        text: axisX,
-                        font: {
-                            size: 20,
-                            weight: 'bold',
-                            lineHeight: 1.2,
-                        },
-                        }
-                    },
-                    y: {
-                        display: true,
-                        title: {
-                        display: true,
-                        text: '人数',
-                        font: {
-                            size: 20,
-                            weight: 'bold',
-                            lineHeight: 1.2,
-                        },
-                        }
-                    }
-                    }
-            },
         });
     }
 }

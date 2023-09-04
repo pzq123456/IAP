@@ -31,6 +31,17 @@ export function innerIcon(index: number, icons: string[] = myicons) {
     });
 }
 
+/**
+ * 获取图标的 url
+ * @param index - 图标索引
+ * @param icons - 图标数组
+ * @returns 
+ */
+export function innerIconURL(index: number, icons: string[] = myicons) {
+    let url = icons[index];
+    return url;
+}
+
 
 
 

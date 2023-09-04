@@ -122,10 +122,16 @@ function about(
   fatherContainer.style.display = 'block' ;
   // 使用 dark图层 
   let DarkLayer = document.querySelector<HTMLDivElement>('.DarkLayer')!;
-  console.log(DarkLayer);
   DarkLayer.style.display = DarkLayer.style.display === 'block' ? 'none' : 'block';
+
+  let member = [
+    [
+      'pzq','https://github.com/pzq123456',"https://avatars.githubusercontent.com/u/82391775?s=400&u=97bc1bb95645ba4706c8098649a8b7f8642f2cbd&v=4"
+    ]
+  ]
+
   // 创建组件
-  const flowInfo = new About([1,2,3,4,5,6,7,8,9,10],['2005','2006','2007','2008','2009','2010','2011','2012','2013','2014'],'test','时间');
+  const flowInfo = new About(member);
   // 然后将组件添加到页面中
   fatherContainer.appendChild(flowInfo);
 }

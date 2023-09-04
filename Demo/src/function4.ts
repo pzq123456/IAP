@@ -1,8 +1,9 @@
 import { formToJSON } from "axios";
 import { GeoFeatures2Arr, readDataFromGeoJSON } from "./Abstract/MetaData";
-import { drawMultiPoint2BLMap, drawPoint2BLMap, innerIcon } from "./helpers/BLDraw";
+import { drawMultiPoint2BLMap, drawPoint2BLMap, innerIcon, innerIconURL } from "./helpers/BLDraw";
 import { haversine } from "./packages/Distance";
 import { createMultiPointFromArr } from "./packages/MetaData";
+import { showIconLegend } from "./packages/Colors";
 
 /**
  * ZQY
@@ -28,7 +29,7 @@ export function function4(map: any){
             let color = distance2ColorIndex(i,D);
             drawPoint2BLMap(pois[i],map,innerIcon(color));
         }
-
+        showIconLegend(D,[innerIconURL(1),innerIconURL(2),innerIconURL(3)]);
     })
 }
 
@@ -58,3 +59,4 @@ function point2PointsDistance(
     }
     return res;
 }
+

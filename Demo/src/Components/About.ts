@@ -21,9 +21,11 @@ export class About extends HTMLElement {
         </div>
         `;
         // 为按钮添加点击事件
-        // this.querySelector('#close')!.addEventListener('click', () => {
-        //     this.remove();
-        // });
+        this.querySelector('#close')!.addEventListener('click', () => {
+            document.querySelector('#components')!.style.display = 'none';
+            document.querySelector('.DarkLayer')!.style.display = 'none';
+            this.remove();
+        });
         this.data = data;
         this.labels = labels;
         this.name = name;

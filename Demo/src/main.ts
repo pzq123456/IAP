@@ -21,6 +21,7 @@ const componentsArr = [
   ['yield-info', Yield],
   ['post-card', Post],
   ['flow-info', Flow],
+  ['about-info', About]
 ] as [string, any][]; 
 
 registerComponents(componentsArr);
@@ -40,9 +41,9 @@ createToolBar(document.querySelector<HTMLDivElement>('#toolBar')!, [
   // { name: '点线关系', action: () =>  example8()},
   // { name: 'k-means', action: () =>  example9(map)},
   // { name: '图文信息窗口', action: () =>  example10(map)},
-  { name: 'LM', action: () =>  Fun.function3()},
-  { name: 'zqy', action: () =>  Fun.function4()},
-  { name: 'LJY', action: () =>  Fun.function5()},
+  { name: 'LM', action: () =>  Fun.function3(map)},
+  { name: 'zqy', action: () =>  Fun.function4(map)},
+  { name: 'LJY', action: () =>  Fun.function5(map)},
   { name: 'QSF', action: () =>  Fun.function6(map)},
   { name: 'PZQ', action: () =>  Fun.function7(map)},
   { name: '栅格', action: () =>  Fun.function8(map)},
@@ -117,6 +118,7 @@ function registerComponents(
 function about(
   fatherContainer: HTMLDivElement = document.querySelector<HTMLDivElement>('#components')!
 ){
+  fatherContainer.style.display = 'block' ;
   // 使用 dark图层 
   let DarkLayer = document.querySelector<HTMLDivElement>('.DarkLayer')!;
   console.log(DarkLayer);

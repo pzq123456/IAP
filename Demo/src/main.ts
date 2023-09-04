@@ -5,7 +5,7 @@ import { Yield } from './Components/Chart1.ts';
 import { Post } from './Components/Post.ts';
 import { Flow } from './Components/Chart2.ts';
 import { About } from './Components/About.ts';
-
+import { PathsCom } from './Components/Paths.ts';
 
 declare const BMapGL: any;
 
@@ -21,6 +21,8 @@ const componentsArr = [
   ['yield-info', Yield],
   ['post-card', Post],
   ['flow-info', Flow],
+  ['about-info', About],
+  ['path-Com', PathsCom],
 ] as [string, any][]; 
 
 registerComponents(componentsArr);

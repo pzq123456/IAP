@@ -1,7 +1,7 @@
 import { drawRoad2Map } from "./helpers/BLDraw";
 import { Dijkstra } from "./packages/Dijkstra";
 import { haversine } from "./packages/Distance";
-
+import { PathsCom } from "./Components/Paths";
 /**
  * QSF
  */
@@ -52,6 +52,9 @@ export function function6(map: any){
     path as number[];
     console.log(path);
     drawRoad2Map(points,edges,path,map)
+
+    // 添加小组件
+    addComPaths(document.querySelector<HTMLDivElement>('#components')!)
 }
 
 function addDistance2Edge(
@@ -66,8 +69,14 @@ function addDistance2Edge(
         let end = points[edge[1]];
         let dis = distance(start,end);
         newEdges.push([edge[0],edge[1],dis]);
-    }
+    } 
     return newEdges;
 }
-
-
+function addComPaths(
+    fatherContainer: HTMLDivElement = document.querySelector<HTMLDivElement>('#components')!
+){
+    // 首先实例化组件
+    const pathsCom=new PathsCom()
+    // 然后将组件添加到页面中
+    fatherContainer.appendChild(pathsCom)
+}

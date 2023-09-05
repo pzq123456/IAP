@@ -10,10 +10,12 @@ export class About extends HTMLElement {
         this.member = member;
         let html = `<div style="display:flex;flex-direction:column"> <h1> 开发人员 </h1>`;
         for(let i = 0 ; i < this.member.length ; i++){
-            html += `<div style="display:flex;align-items:center">
+            html += `<div style="display:flex;align-items:center ; justify-content:center ; flex-direction:column">
                 <img src="${this.member[i][2]}" style="width:100px;height:100px;border-radius:50%;
                 "></img>
-                <h3> ${ this.member[i][0] } </h3>
+                <div style="width:20px ; height:20px"></div>
+                    <a href="${this.member[i][1]}"> <h3> ${ this.member[i][0] } </h3> </a>
+                </div>
             </div>`
         }
         html += `</div>`;

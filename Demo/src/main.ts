@@ -126,6 +126,12 @@ function about(
 
   let member = [
     [
+      'LM','https://github.com/lm17865996839','https://avatars.githubusercontent.com/u/137787028?v=4'
+    ],
+    [
+      'ZQY','https://github.com/zqy716','https://avatars.githubusercontent.com/u/137897135?v=4'
+    ],
+    [
       'pzq','https://github.com/pzq123456',"https://avatars.githubusercontent.com/u/82391775?s=400&u=97bc1bb95645ba4706c8098649a8b7f8642f2cbd&v=4"
     ]
   ]

@@ -77,7 +77,7 @@ function rapperColor(value:number, values:number[]){
 function addCom2Page(
     fatherContainer: HTMLDivElement = document.querySelector<HTMLDivElement>('#components')!,
     data: number[],
-    labels: string[],;
+    labels: string[]
   ){
     // 首先实例化组件
     const flowInfo = new Flow(data,['A','B','C'],'逐地点');

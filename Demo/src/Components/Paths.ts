@@ -9,7 +9,7 @@ export class PathsCom extends HTMLElement{
         this.innerHTML = `
         <div class="chart-container" style="position: relative; height:400px; width:500px">
             
-        
+
         <select id="paths_selectSource" style="width:100px">
             <option value="0">0</option>
             <option value="1">1</option>

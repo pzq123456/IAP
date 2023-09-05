@@ -47,14 +47,19 @@ export function function6(map: any){
         [0, 2],
     ] as [number, number][];
 
-    // 获取源点选项值
-    var source = getSelecValue('#paths_selectSource')
-    // 获取目标点选项值
-    var target = getSelecValue('#paths_selectTarget')
-    // getSelecValue('#paths_selectSource')/
-    // console.log(source,target)
-    let paths_button = document.getElementById("paths_button")
+
+    let paths_button = document.getElementById("paths_button");
+
+    console.log("paths_button");
+    console.log(paths_button);
+
     paths_button?.addEventListener('click',function(){
+        // 获取源点选项值
+        var source = getSelecValue('#paths_selectSource')
+        // 获取目标点选项值
+        var target = getSelecValue('#paths_selectTarget')
+        // getSelecValue('#paths_selectSource')/
+        // console.log(source,target)
         // let pathsSelectValue=[source,target]
         console.log(source,target)
         let EdgesWithWeight = addDistance2Edge(points, edges, haversine);
@@ -116,15 +121,26 @@ function addComPaths(
 function getSelecValue (selectID:string) {
     // let startValue = document.getElementById("paths_select")
     // 获取<select>标签的引用
-    let startSelect = document.querySelector<HTMLDivElement>(selectID)
-    // let startSelect = document.getElementById("paths_selectTarget");
-    //获取select对象： 
-    // var Sel = document.getElementById("citySel");
-    //2：取到选中项的索引：
-    var startIndex = startSelect.selectedIndex;             // selectedIndex是所选中的项的index
-    // 3：获取选中项的value：  
-    var selectValue = startSelect.options[startIndex].value;
-    // return selectValue
-    // console.log(selectValue)
+    let startSelect = document.querySelector<HTMLDivElement>(selectID);
+
+    let selectValue = startSelect?.value;
+    console.log("selectValue")
+    console.log(selectValue)
+
     return selectValue
+
+
+
+    // console.log("startSelect")
+    // console.log(startSelect)
+    // // let startSelect = document.getElementById("paths_selectTarget");
+    // //获取select对象： 
+    // // var Sel = document.getElementById("citySel");
+    // //2：取到选中项的索引：
+    // var startIndex = startSelect.selectedIndex;             // selectedIndex是所选中的项的index
+    // // 3：获取选中项的value：  
+    // var selectValue = startSelect.options[startIndex].value;
+    // // return selectValue
+    // // console.log(selectValue)
+    // return selectValue
 }

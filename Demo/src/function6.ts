@@ -18,6 +18,8 @@ export function function6(map: any){
     // graph.push([2, 5, 2])
     // graph.push([3, 4, 6])
     // graph.push([4, 5, 9])
+    // 添加小组件
+    addComPaths(document.querySelector<HTMLDivElement>('#components')!)
     const points = [
         [
             -108.09402257886713,
@@ -38,23 +40,37 @@ export function function6(map: any){
     ] as [number,number][];
 
     const edges = [
-        [0,1],
-        [1,2],
-        [2,3],
-        [0,3],
-        [0,2],
-    ] as [number,number][];
+        [0, 1],
+        [1, 2],
+        [2, 3],
+        [0, 3],
+        [0, 2],
+    ] as [number, number][];
 
-    const EdgesWithWeight = addDistance2Edge(points,edges,haversine);
-    console.log(EdgesWithWeight);
-    let dijkstra = new Dijkstra(EdgesWithWeight, 2);
-    let [path, length] = dijkstra.dijkstra(0);
-    path as number[];
-    console.log(path);
-    drawRoad2Map(points,edges,path,map)
+    // 获取源点选项值
+    var source = getSelecValue('#paths_selectSource')
+    // 获取目标点选项值
+    var target = getSelecValue('#paths_selectTarget')
+    // getSelecValue('#paths_selectSource')/
+    // console.log(source,target)
+    let paths_button = document.getElementById("paths_button")
+    paths_button?.addEventListener('click',function(){
+        // let pathsSelectValue=[source,target]
+        console.log(source,target)
+        let EdgesWithWeight = addDistance2Edge(points, edges, haversine);
+        console.log(EdgesWithWeight);
+        let dijkstra = new Dijkstra(EdgesWithWeight, source);
+        let [path, length] = dijkstra.dijkstra(target);
+        path as number[];
+        console.log(path);
+        drawRoad2Map(points, edges, path, map)
+    })
+        
 
-    // 添加小组件
-    addComPaths(document.querySelector<HTMLDivElement>('#components')!)
+    
+    // let paths_button = document.getElementById("paths_button")
+    // paths_button?.addEventListener('click',())=>{
+    // })
 }
 
 function addDistance2Edge(
@@ -80,4 +96,35 @@ function addComPaths(
     const pathsCom= new PathsCom(0,1);
     // 然后将组件添加到页面中
     fatherContainer.appendChild(pathsCom)
+}
+// const getSelecValue=(selectID:string)=>{
+//     // let startValue = document.getElementById("paths_select")
+//     // 获取<select>标签的引用
+//     const startSelect = document.getElementById(selectID);
+//     //获取select对象： 
+//     // var Sel = document.getElementById("citySel");
+//     //2：取到选中项的索引：
+//     var startIndex = startSelect.selectedIndex;             // selectedIndex是所选中的项的index
+//    // 3：获取选中项的value：  
+//     var selectValue = startSelect.options[startIndex].value;
+//     // return selectValue
+//     console.log(selectValue)
+//     return selectValue
+// }
+
+
+function getSelecValue (selectID:string) {
+    // let startValue = document.getElementById("paths_select")
+    // 获取<select>标签的引用
+    let startSelect = document.querySelector<HTMLDivElement>(selectID)
+    // let startSelect = document.getElementById("paths_selectTarget");
+    //获取select对象： 
+    // var Sel = document.getElementById("citySel");
+    //2：取到选中项的索引：
+    var startIndex = startSelect.selectedIndex;             // selectedIndex是所选中的项的index
+    // 3：获取选中项的value：  
+    var selectValue = startSelect.options[startIndex].value;
+    // return selectValue
+    // console.log(selectValue)
+    return selectValue
 }

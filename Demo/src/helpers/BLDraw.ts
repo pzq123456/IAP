@@ -19,7 +19,9 @@ export function createIcon(url: string, size: [number, number], offset: [number,
     });
 }
 
-const myicons = ['greenStar.svg','bluePoint.svg','redPoint.svg','pinkPoint.svg']
+const myicons = [
+    'shop.png','shopg.png','shopy.png','shopr.png','greenStar.svg','bluePoint.svg','redPoint.svg','pinkPoint.svg',
+]
 
 
 export function innerIcon(index: number, icons: string[] = myicons) {
@@ -29,8 +31,19 @@ export function innerIcon(index: number, icons: string[] = myicons) {
     });
 }
 
+/**
+ * 获取图标的 url
+ * @param index - 图标索引
+ * @param icons - 图标数组
+ * @returns 
+ */
+export function innerIconURL(index: number, icons: string[] = myicons) {
+    let url = icons[index];
+    return url;
+}
 
 
+// Vector Layer
 
 /**
  * 在 百度地图上 绘制点
@@ -167,6 +180,7 @@ export function drawSimplePolygon2Map(polygon: any[], map: any, style: Object = 
     let blPolygon = new BMapGL.Polygon(blPoints, style);
     map.addOverlay(blPolygon);
 }
+
 /**
  * 绘制道路
  * @param nodes - 节点 
@@ -209,4 +223,30 @@ export function drawRoad2Map(
         drawPoint2BLMap(lineStrings[lineStrings.length - 1],map,innerIcon(2));
     }
 
+}
+
+/**
+ * 绘制栅格图层
+ * @param extent - [minLon, minLat, maxLon, maxLat]
+ * @param getCanvas - 获取 canvas 的函数
+ * @param map - 百度地图实例
+ */
+export function drawRaster2BLMap(
+    extent: [number, number, number, number], // [minLon, minLat, maxLon, maxLat]
+    getCanvas: ()=> HTMLCanvasElement,
+    map: any
+){
+    // 创建叠加物显示的范围Bounds
+    var pStart = new BMapGL.Point(extent[0], extent[1]);
+    var pEnd = new BMapGL.Point(extent[2], extent[3]);
+    var bounds = new BMapGL.Bounds(new BMapGL.Point(pStart.lng, pEnd.lat), 
+                                    new BMapGL.Point(pEnd.lng, pStart.lat));
+    // 创建地面叠加层实例
+    var imgOverlay = new BMapGL.GroundOverlay(bounds, {
+        type: 'canvas',
+        url: getCanvas(),
+        opacity: 0.8
+    });
+    // 叠加层添加到地图
+    map.addOverlay(imgOverlay);
 }

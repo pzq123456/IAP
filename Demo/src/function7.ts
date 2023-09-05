@@ -1,6 +1,6 @@
 import { GeoFeatures2Arr, GeoPolygons2SimpleArr, readDataFromGeoJSON } from "./Abstract/MetaData";
 import { Flow } from "./Components/Chart2";
-import { drawMultiPoint2BLMap, drawRoad2Map, drawSimplePolygon2Map, innerIcon } from "./helpers/BLDraw";
+import { drawMultiPoint2BLMap, drawSimplePolygon2Map, innerIcon } from "./helpers/BLDraw";
 import { PointInsidePolygon } from "./packages/CGUtils";
 import { N2C, showColorLegend } from "./packages/Colors";
 import { SpherePolygonArea } from "./packages/Distance";

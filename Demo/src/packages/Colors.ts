@@ -82,3 +82,27 @@ function evenValue(){
     }
     return res;
 }
+
+export function showIconLegend(
+    values:number[],
+    icons:string[],
+    fatherContainer: HTMLDivElement = document.querySelector<HTMLDivElement>('.Legend')!
+){
+    // 首先获取最大值和最小值
+    let {max,min} = getMaxMin(values);
+    // 然后计算每个区间的值
+    let unit = (max - min) / icons.length;
+    let level = [];
+    for(let i = 0 ; i < icons.length ; i++){
+        level.push(min + i * unit);
+    }
+    let html = `<div style="display:flex;flex-direction:column">`;
+    for(let i = 0 ; i < icons.length ; i++){
+        html += `<div style="display:flex;align-items:center">
+            <img src="${icons[i]}" style="width:20px;height:20px;"></img>
+            <div>${ (level[i]).toFixed(1) } km </div>
+        </div>`
+    }
+    html += `</div>`;
+    fatherContainer.innerHTML = html;
+}

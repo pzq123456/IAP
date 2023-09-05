@@ -3,12 +3,9 @@
  */
 import axios from 'axios';
 import * as RV from '../src/packages/rvgeo.js'
+import { drawRaster2BLMap } from './helpers/BLDraw.js';
 export function function8(map:any){
     axios.get('dem.csv').then((res)=>{
-        // let myCanvas = document.querySelector<HTMLCanvasElement>('#Raster')!;
-        // myCanvas.height = 512;
-        // myCanvas.width = 1024;
-
         // create canvas and add it to component
         let components = document.querySelector<HTMLDivElement>('#components')!;
         let myCanvas = document.createElement('canvas');
@@ -24,5 +21,8 @@ export function function8(map:any){
         let stt2 =new RV.Stastic(grid2.get1DArray());
         let colorramp = new RV.Renderer.ColorRamp(stt2);
         gridview2.draw(colorramp,myCanvas.height,myCanvas.width,true,"累积流量测试视图（重分类后）");
+
+        let mbr = [-107.92357269467898,38.69203706472152,-107.84398506918498,38.640907812582896];
+        drawRaster2BLMap(mbr,()=>myCanvas,map);
     })
 }

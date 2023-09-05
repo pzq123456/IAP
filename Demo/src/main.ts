@@ -5,7 +5,7 @@ import { Yield } from './Components/Chart1.ts';
 import { Post } from './Components/Post.ts';
 import { Flow } from './Components/Chart2.ts';
 import { About } from './Components/About.ts';
-
+import { PathsCom } from './Components/Paths.ts';
 
 declare const BMapGL: any;
 
@@ -21,6 +21,8 @@ const componentsArr = [
   ['yield-info', Yield],
   ['post-card', Post],
   ['flow-info', Flow],
+  ['about-info', About],
+  ['paths-info', PathsCom],
 ] as [string, any][]; 
 
 registerComponents(componentsArr);
@@ -41,7 +43,7 @@ createToolBar(document.querySelector<HTMLDivElement>('#toolBar')!, [
   // { name: 'k-means', action: () =>  example9(map)},
   // { name: '图文信息窗口', action: () =>  example10(map)},
   { name: 'LM', action: () =>  Fun.function3(map)},
-  { name: 'zqy', action: () =>  Fun.function4()},
+  { name: 'zqy', action: () =>  Fun.function4(map)},
   { name: 'LJY', action: () =>  Fun.function5(map)},
   { name: 'QSF', action: () =>  Fun.function6(map)},
   { name: 'PZQ', action: () =>  Fun.function7(map)},
@@ -117,12 +119,19 @@ function registerComponents(
 function about(
   fatherContainer: HTMLDivElement = document.querySelector<HTMLDivElement>('#components')!
 ){
+  fatherContainer.style.display = 'block' ;
   // 使用 dark图层 
   let DarkLayer = document.querySelector<HTMLDivElement>('.DarkLayer')!;
-  console.log(DarkLayer);
   DarkLayer.style.display = DarkLayer.style.display === 'block' ? 'none' : 'block';
+
+  let member = [
+    [
+      'pzq','https://github.com/pzq123456',"https://avatars.githubusercontent.com/u/82391775?s=400&u=97bc1bb95645ba4706c8098649a8b7f8642f2cbd&v=4"
+    ]
+  ]
+
   // 创建组件
-  const flowInfo = new About([1,2,3,4,5,6,7,8,9,10],['2005','2006','2007','2008','2009','2010','2011','2012','2013','2014'],'test','时间');
+  const flowInfo = new About(member);
   // 然后将组件添加到页面中
   fatherContainer.appendChild(flowInfo);
 }

@@ -2,6 +2,7 @@ import { drawRoad2Map } from "./helpers/BLDraw";
 import { Dijkstra } from "./packages/Dijkstra";
 import { haversine } from "./packages/Distance";
 import { PathsCom } from "./Components/Paths";
+import { removeAllOverlay } from "./helpers/BLDraw";
 /**
  * QSF
  */
@@ -18,6 +19,7 @@ export function function6(map: any){
     // graph.push([2, 5, 2])
     // graph.push([3, 4, 6])
     // graph.push([4, 5, 9])
+    
     // 添加小组件
     addComPaths(document.querySelector<HTMLDivElement>('#components')!)
     const points = [
@@ -54,13 +56,12 @@ export function function6(map: any){
     console.log(paths_button);
 
     paths_button?.addEventListener('click',function(){
+        removeAllOverlay(map)
         // 获取源点选项值
         var source = getSelecValue('#paths_selectSource')
         // 获取目标点选项值
         var target = getSelecValue('#paths_selectTarget')
-        // getSelecValue('#paths_selectSource')/
-        // console.log(source,target)
-        // let pathsSelectValue=[source,target]
+        
         console.log(source,target)
         let EdgesWithWeight = addDistance2Edge(points, edges, haversine);
         console.log(EdgesWithWeight);

@@ -8,4 +8,3 @@ function initMap(){
       map.enableScrollWheelZoom(true);     //开启鼠标滚轮缩放
       return map;
 }
-    

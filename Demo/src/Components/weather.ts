@@ -229,23 +229,23 @@ export class Weather extends HTMLElement{
 
                 switch (json.weather[0].main) {
                     case 'Clear':
-                        document.querySelector('.weather-box img')!.src = 'clear.png';
+                        document.querySelector('.weather-box img')!.src = 'img\clear.png';
                         break;
 
                     case 'Rain':
-                        document.querySelector('.weather-box img')!.src = 'rain.png';
+                        document.querySelector('.weather-box img')!.src = 'img\rain.png';
                         break;
 
                     case 'Snow':
-                        document.querySelector('.weather-box img')!.src = 'snow.png';
+                        document.querySelector('.weather-box img')!.src = 'img\snow.png';
                         break;
 
                     case 'Clouds':
-                        document.querySelector('.weather-box img')!.src = 'cloud.png';
+                        document.querySelector('.weather-box img')!.src = 'img\cloud.png';
                         break;
 
                     case 'Haze':
-                        document.querySelector('.weather-box img')!.src = 'mist.png';
+                        document.querySelector('.weather-box img')!.src = 'img\mist.png';
                         break;
 
                     default:

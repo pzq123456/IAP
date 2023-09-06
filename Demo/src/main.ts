@@ -96,8 +96,6 @@ function toggleComponent(
   fatherContainer: HTMLDivElement = document.querySelector<HTMLDivElement>('#components')!
 ){
     fatherContainer.style.display = fatherContainer.style.display === 'none' ? 'block' : 'none';
-    let Legend = document.querySelector<HTMLDivElement>('.Legend')!;
-    Legend.style.display = Legend.style.display === 'none' ? 'block' : 'none';
 }
 
 function initMap(){
@@ -119,12 +117,12 @@ function registerComponents(
 }
 
 function about(
-  fatherContainer: HTMLDivElement = document.querySelector<HTMLDivElement>('#components')!
+  fatherContainer: HTMLDivElement = document.querySelector<HTMLDivElement>('.diolague')!
 ){
   fatherContainer.style.display = 'block' ;
   // 使用 dark图层 
   let DarkLayer = document.querySelector<HTMLDivElement>('.DarkLayer')!;
-  DarkLayer.style.display = DarkLayer.style.display === 'block' ? 'none' : 'block';
+  DarkLayer.style.display = 'block';
 
   let member = [
     [

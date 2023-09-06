@@ -20,12 +20,12 @@ export class About extends HTMLElement {
         }
         html += `</div>`;
         // add button 
-        html += `<button id="close" style="position:absolute;right:0;top:0;">X</button>`
+        html += `<button id="close" style="position:absolute;right:0;top:0; width:30px;height:30px;border-radius:50%;background-color:transparent;border:none;outline:none">X</button>`
         this.innerHTML = html;
 
         // 为按钮添加点击事件
         this.querySelector('#close')!.addEventListener('click', () => {
-            document.querySelector('#components')!.style.display = 'none';
+            document.querySelector('.diolague')!.style.display = 'none';
             document.querySelector('.DarkLayer')!.style.display = 'none';
             this.remove();
         });

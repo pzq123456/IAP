@@ -12,12 +12,38 @@
     body{
       background: linear-gradient(90deg, #19848c 0%, #035536 100%);
     }
+
+    .diolague{
+      /*悬浮在地图上方*/
+      position: absolute;
+      /* 居中 */
+      top: 10%;
+      left: 20%;
+
+      z-index: 999;
+      /* 高斯模糊 */
+      background: rgba(244, 6, 6, 0.497);
+      backdrop-filter: blur(10px);
+      border-radius: 10px;
+      width: 1200px;
+      height: 800px;
+      display: none;
+            /* 滚动条 */
+      overflow: auto;
+    }
+
     .title{
       font-size: 20px;
-      font-weight: bold;
-      font-style: oblique;
-      color: #ffffff;
-      margin-left: 10px;
+      /* background-color: #035536; */
+      width: 10%;
+
+      /* 居中内部元素 */
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+
+
     }
     .bar{
       border-radius: 30px 30px 30px 30px;
@@ -31,10 +57,13 @@
       flex-direction: row;
       align-items: center;
       justify-content: space-between;
-      background-color: #238c41af;
+      background-color: rgba(34, 139, 34, 0.6);
+      /* 阴影 */
+      box-shadow: 0px 0px 10px 10px #00000063;
     }
     
     #toolBar{
+      /* background-color: #06ffa0; */
       flex-direction: column;
       align-items: center;
       justify-content: center;
@@ -53,8 +82,10 @@
 
     button{
       border: solid 1px #ffffff;
-      border-radius: 5px;
+      border-radius: 20px;
       background-color: #8aac8a;
+      height: 40px;
+      width: 130px;
       color: white;
       text-align: center;
       font-size: 20px;
@@ -101,7 +132,7 @@
       backdrop-filter: blur(10px);
     }
     .map{
-      height: 860px;
+      height: 920px;
       width: 100%;
     }
 
@@ -131,9 +162,8 @@
       left: 0px;
       z-index: 997;
       /* 高斯模糊 */
-      background: rgba(161, 212, 197, 0.497);
+      background: rgba(161, 212, 197, 0.169);
       backdrop-filter: blur(10px);
-      border: solid 2px #00000063;
       border-radius: 10px;
       width: 140px;
       height: 100px;
@@ -190,12 +220,16 @@
 
       </div>
 
+      <div class="diolague">
+        <div id="diolague">
+          <h3>Diolague</h3>
+        </div>
+      </div>
 
       <div class="DarkLayer"></div>
 
       <div class="Legend">
         <div id="Legend">
-          <h3>Legend</h3>
         </div>
       </div>
         <div class="map" id="allmap">

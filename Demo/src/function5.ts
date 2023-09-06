@@ -24,6 +24,10 @@ export function function5(map: any){
     let arr= mps.toArray();
     let data = [];//
 
+    var view = new mapvgl.View({
+        map: map
+    });
+
     //绘制游客分布图
     removeAllOverlay(map);
     let icon = innerIcon(0);
@@ -53,6 +57,6 @@ export function function5(map: any){
     console.log(data);
 
     //绘图
-    Createheatmap(map,data);
+    Createheatmap(view,data);
 
 }

@@ -1,0 +1,25 @@
+body{
+    font-size: 20px;
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: center;
+    padding: 20px;
+}
+
+/* 隐藏版权信息 */
+.BMap_cpyCtrl {
+    display: none;
+    }  
+    .anchorBL img {
+    display: none;
+    }
+    #components{
+    height: 860px;
+    width: 600px;
+    /* 背景高斯模糊 */
+    background: rgba(255, 255, 255, 0.832);
+    backdrop-filter: blur(10px);
+    }
+    .map{
+    height: 860px;
+    width: 100%;
+    }

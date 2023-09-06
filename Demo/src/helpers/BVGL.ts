@@ -1,10 +1,8 @@
 /**
  * mapvgl 封装
  */
-export function Createheatmap(map:any,data:any) {
-    var view = new mapvgl.View({
-        map: map
-    });
+export function Createheatmap(view:any,data:any) {
+    
     var heatmap = new mapvgl.HeatmapLayer({
         size: 200000, // 单个点绘制大小
         max: 500, // 最大阈值

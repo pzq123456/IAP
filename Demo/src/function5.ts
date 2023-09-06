@@ -6,6 +6,7 @@ import { mockPoints } from "./tests/Mock";
 import { removeAllOverlay,innerIcon,drawMultiPoint2BLMap,drawPoint2BLMap } from './helpers/BLDraw.ts';
 import { K_means } from "./packages/Cluster";
 import { Createheatmap } from "./helpers/BVGL.ts"
+import { Weather } from "./Components/weather.ts";
 
 export function function5(map: any){
     //1.kmeans聚类
@@ -59,4 +60,16 @@ export function function5(map: any){
     //绘图
     Createheatmap(view,data);
 
+
+    //组件
+    addCom2Page(document.querySelector<HTMLDivElement>('#components')!);
 }
+
+function addCom2Page(
+    fatherContainer: HTMLDivElement = document.querySelector<HTMLDivElement>('#components')!,
+  ){
+    // 首先实例化组件
+    const weatherinfo = new Weather();
+    // 然后将组件添加到页面中
+    fatherContainer.appendChild(weatherinfo);
+  }

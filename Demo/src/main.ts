@@ -6,6 +6,7 @@ import { Post } from './Components/Post.ts';
 import { Flow } from './Components/Chart2.ts';
 import { About } from './Components/About.ts';
 import { PathsCom } from './Components/Paths.ts';
+import { Weather } from './Components/weather.ts';
 
 declare const BMapGL: any;
 
@@ -23,6 +24,7 @@ const componentsArr = [
   ['flow-info', Flow],
   ['about-info', About],
   ['paths-info', PathsCom],
+  ['weather-info', Weather],
 ] as [string, any][]; 
 
 registerComponents(componentsArr);

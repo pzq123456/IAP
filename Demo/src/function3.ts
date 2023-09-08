@@ -21,7 +21,7 @@ export function function3(
         let arr = GeoFeatures2Arr(res.data.features);
         let simPolygons = GeoPolygons2SimpleArr(arr);
 
-        readDataFromGeoJSON("time1.json").then((res) => {
+        readDataFromGeoJSON("people1.json").then((res) => {
             let pois = GeoFeatures2Arr(res.data.features);
             let icon = innerIcon(0);
             drawMultiPoint2BLMap(pois,map,icon);

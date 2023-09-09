@@ -1,34 +1,57 @@
-import { formToJSON } from "axios";
 import { GeoFeatures2Arr, readDataFromGeoJSON } from "./Abstract/MetaData";
 import { drawMultiPoint2BLMap, drawPoint2BLMap, innerIcon, innerIconURL } from "./helpers/BLDraw";
 import { haversine } from "./packages/Distance";
 import { createMultiPointFromArr } from "./packages/MetaData";
 import { showIconLegend } from "./packages/Colors";
+import { Post } from "./Components/Post";
 
 /**
  * ZQY
  */
 export function function4(map: any){
-    // console.log("function4");
-    readDataFromGeoJSON("time1.json").then((res) => {
+    readDataFromGeoJSON("shop.json").then((res) => {
         let pois = GeoFeatures2Arr(res.data.features);
         let multip = createMultiPointFromArr(pois);
         let XMLoc = multip.calculateCentroid(); // 小明的位置
-        drawPoint2BLMap(XMLoc,map);
+        let XMIcon = innerIcon(8);
+        drawPoint2BLMap(XMLoc,map,XMIcon); // 绘制小明
 
         let icon = innerIcon(0);
         drawMultiPoint2BLMap(pois,map,icon); // 绘制商店
 
         // 计算距离
         let D = point2PointsDistance(XMLoc,pois);
-        console.log(D);
-        let color = distance2ColorIndex(10,D);
-        console.log(color);
-
+        let bgcolor = [
+            '#00FF00',
+            '#FFFF00',
+            '#FF0000'
+        ]
         for(let i = 0; i < pois.length; i++){
             let color = distance2ColorIndex(i,D);
-            drawPoint2BLMap(pois[i],map,innerIcon(color));
+            let marker = drawPoint2BLMap(pois[i],map,innerIcon(color));
+
+            // 添加点击事件
+            marker.addEventListener('click',function(){
+                // 创建组件
+                const post = new Post(
+                    bgcolor[color - 1],
+                    D[i],
+                    [1,2,3,4,5,6,5,4,3,2,1],
+                    ['1','2','3','4','5','6','7','8','9','10','11'],
+                    '餐饮摊位',
+                    '时间'
+                );
+                // 然后将组件添加到地图上
+                // document.body.appendChild(post);
+                let infoWindow = new BMapGL.InfoWindow(post, {
+                    width : 540,     // 信息窗口宽度
+                    height: 430,     // 信息窗口高度
+                });
+                map.openInfoWindow(infoWindow,marker.getPosition());
+            }
+            )
         }
+
         showIconLegend(D,[innerIconURL(1),innerIconURL(2),innerIconURL(3)]);
     })
 }

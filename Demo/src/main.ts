@@ -55,6 +55,7 @@ createToolBar(document.querySelector<HTMLDivElement>('#toolBar')!, [
   { name: '组件2', action: () =>  components2()},
   { name: '清除组件', action: () =>  removeComponents()},
   { name: 'toggle组件', action: () =>  toggleComponent()},
+  { name: 'testPost', action: () =>  testPost()},
   { name: '关于', action: () =>  about()},
 ],20)
 // =============END================ 
@@ -140,6 +141,9 @@ function about(
       'ZQY','https://github.com/zqy716','https://avatars.githubusercontent.com/u/137897135?v=4'
     ],
     [
+      'LJY','',''
+    ],
+    [
       'pzq','https://github.com/pzq123456',"https://avatars.githubusercontent.com/u/82391775?s=400&u=97bc1bb95645ba4706c8098649a8b7f8642f2cbd&v=4"
     ]
   ]
@@ -150,3 +154,16 @@ function about(
   fatherContainer.appendChild(flowInfo);
 }
 
+function testPost(){
+  // 创建组件
+  const post = new Post(
+    'orange',
+    100,
+    [1,2,3,4,5,6,5,4,3,2,1],
+    ['1','2','3','4','5','6','7','8','9','10','11'],
+    'test',
+    'test'
+  );
+  // 然后将组件添加到页面中
+  document.body.appendChild(post);
+}

@@ -20,7 +20,15 @@ export function createIcon(url: string, size: [number, number], offset: [number,
 }
 
 const myicons = [
-    'shop.png','shopg.png','shopy.png','shopr.png','greenStar.svg','bluePoint.svg','redPoint.svg','pinkPoint.svg',
+    'shop.png',
+    'shopg.png',
+    'shopy.png',
+    'shopr.png',
+    'greenStar.svg',
+    'bluePoint.svg',
+    'redPoint.svg',
+    'pinkPoint.svg',
+    'person.png',
 ]
 
 

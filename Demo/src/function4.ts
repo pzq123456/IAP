@@ -36,8 +36,8 @@ export function function4(map: any){
                 const post = new Post(
                     bgcolor[color - 1],
                     D[i],
-                    [1,2,3,4,5,6,5,4,3,2,1],
-                    ['1','2','3','4','5','6','7','8','9','10','11'],
+                    randomPeopleFlow(11),
+                    ['6:00','7:00','8:00','9:00','10:00','11:00','12:00','13:00','14:00','15:00','16:00'],
                     '餐饮摊位',
                     '时间'
                 );
@@ -83,3 +83,30 @@ function point2PointsDistance(
     return res;
 }
 
+// 随机生成人流量
+function randomPeopleFlow(
+    length: number
+){
+    // 使得人流量随时间均匀变化 正态分布
+    let res = [];
+    // 每次调用时添加随机干扰量
+    let random = Math.random() * 0.1;
+    let u = 0.5 + random;
+    let o = 0.1;
+    for(let i = 0; i < length; i++){
+        let x = i / length;
+        let y = normalDistribution(x,u,o);
+        res.push(y);
+    }
+    return res;
+}
+
+// 正态分布
+function normalDistribution(
+    x: number,
+    u: number,
+    o: number
+){
+    let res = 1 / (o * Math.sqrt(2 * Math.PI)) * Math.exp(- (x - u) * (x - u) / (2 * o * o));
+    return res;
+}

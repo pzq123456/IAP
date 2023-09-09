@@ -8,47 +8,80 @@ import { removeAllOverlay } from "./helpers/BLDraw";
  */
 export function function6(map: any){
     console.log("function6");
-    // // Testing algorithm
-    // let graph = []
-    // graph.push([0, 1, 7])
-    // graph.push([0, 2, 9])
-    // graph.push([0, 5, 14])
-    // graph.push([1, 2, 10])
-    // graph.push([1, 3, 15])
-    // graph.push([2, 3, 11])
-    // graph.push([2, 5, 2])
-    // graph.push([3, 4, 6])
-    // graph.push([4, 5, 9])
-    
     // 添加小组件
     addComPaths(document.querySelector<HTMLDivElement>('#components')!)
     const points = [
+        //0
         [
-            -108.09402257886713,
-            39.83360180208061
+            -104.98393311497367,
+            39.74427367092693
         ],
+        //1
         [
-            -103.1154647370254,
-            39.91358732061801
+            -105.78195469386588,
+            39.85051999503219
         ],
+        //2
         [
-            -103.74880784411923,
-            38.20807776423709
+            -106.03547779474128,
+            39.482387555563406
         ],
+        //3
         [
-            -106.91552337959027,
-            38.854030876050075
-        ]
+            -105.88735610143544,
+            38.967321078824256
+        ],
+        //4
+        [
+            -104.82511486861435,
+            38.82698371758465
+        ],
+        //5
+        [
+            -103.69402466699923,
+            39.26239522694598
+        ],
+        //6
+        [
+            -104.3933395277067,
+            39.48905794764724
+        ],
+        //7
+        [
+            -104.8808497481143,
+            39.57897837531627
+        ],
     ] as [number,number][];
 
+    // const edges = [
+    //     [0, 1],
+    //     [1, 2],
+    //     [2, 3],
+    //     [0, 3],
+    //     [0, 2],
+    // ] as [number, number][];
+    // const edges=[
+    //     [0,1,6],
+    //     [0,2,4],
+    //     [0,3,6],
+    //     [1,2,6],
+    //     [2,3,10],
+    // ]
     const edges = [
         [0, 1],
+        [0, 2],
+        [0, 3],
+        [0, 7],
         [1, 2],
         [2, 3],
-        [0, 3],
-        [0, 2],
+        [2, 7],
+        [3, 4],
+        [3, 7],
+        [4, 6],
+        [4, 7],
+        [5, 6],
+        [6, 7],
     ] as [number, number][];
-
 
     let paths_button = document.getElementById("paths_button");
 
@@ -71,12 +104,7 @@ export function function6(map: any){
         console.log(path);
         drawRoad2Map(points, edges, path, map)
     })
-        
-
     
-    // let paths_button = document.getElementById("paths_button")
-    // paths_button?.addEventListener('click',())=>{
-    // })
 }
 
 function addDistance2Edge(
@@ -103,21 +131,6 @@ function addComPaths(
     // 然后将组件添加到页面中
     fatherContainer.appendChild(pathsCom)
 }
-// const getSelecValue=(selectID:string)=>{
-//     // let startValue = document.getElementById("paths_select")
-//     // 获取<select>标签的引用
-//     const startSelect = document.getElementById(selectID);
-//     //获取select对象： 
-//     // var Sel = document.getElementById("citySel");
-//     //2：取到选中项的索引：
-//     var startIndex = startSelect.selectedIndex;             // selectedIndex是所选中的项的index
-//    // 3：获取选中项的value：  
-//     var selectValue = startSelect.options[startIndex].value;
-//     // return selectValue
-//     console.log(selectValue)
-//     return selectValue
-// }
-
 
 function getSelecValue (selectID:string) {
     // let startValue = document.getElementById("paths_select")
@@ -129,19 +142,4 @@ function getSelecValue (selectID:string) {
     console.log(selectValue)
 
     return selectValue
-
-
-
-    // console.log("startSelect")
-    // console.log(startSelect)
-    // // let startSelect = document.getElementById("paths_selectTarget");
-    // //获取select对象： 
-    // // var Sel = document.getElementById("citySel");
-    // //2：取到选中项的索引：
-    // var startIndex = startSelect.selectedIndex;             // selectedIndex是所选中的项的index
-    // // 3：获取选中项的value：  
-    // var selectValue = startSelect.options[startIndex].value;
-    // // return selectValue
-    // // console.log(selectValue)
-    // return selectValue
 }

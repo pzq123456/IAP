@@ -17,6 +17,8 @@ export class PathsCom extends HTMLElement{
             <option value="3">3</option>
             <option value="4">4</option>
             <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
         </select>
         <select id="paths_selectTarget" style="width:100px">
             <option value="0">0</option>
@@ -25,6 +27,8 @@ export class PathsCom extends HTMLElement{
             <option value="3">3</option>
             <option value="4">4</option>
             <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
         </select>
         <button id="paths_button">btn</button>
         </div>

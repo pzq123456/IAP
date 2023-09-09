@@ -12,6 +12,7 @@ declare const BMapGL: any;
 
 // =============初始化代码区域================ 
 const map = initMap(); // 初始化地图并返回地图实例
+const view = initview(map);
 // map.setMapStyleV2({     
 //   styleId: 'dbe14c2d25e7b5be5876be5de4fe5039'
 // });
@@ -46,7 +47,7 @@ createToolBar(document.querySelector<HTMLDivElement>('#toolBar')!, [
   // { name: '图文信息窗口', action: () =>  example10(map)},
   { name: 'LM', action: () =>  Fun.function3(map)},
   { name: 'zqy', action: () =>  Fun.function4(map)},
-  { name: 'LJY', action: () =>  Fun.function5(map)},
+  { name: 'LJY', action: () =>  Fun.function5(map,view)},
   { name: 'QSF', action: () =>  Fun.function6(map)},
   { name: 'PZQ', action: () =>  Fun.function7(map)},
   { name: '栅格', action: () =>  Fun.function8(map,3)},
@@ -107,6 +108,13 @@ var map = new BMapGL.Map("allmap"); // 创建Map实例
   map.enableScrollWheelZoom(true);     //开启鼠标滚轮缩放
   return map;
 }
+function initview(map:any){
+  //创建view
+  var view = new mapvgl.View({
+    map: map
+  });
+    return view;
+  }
 
 function registerComponents(
   componentsArr: [string, any][]

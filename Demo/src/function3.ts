@@ -17,7 +17,7 @@ const color = [
 export function function3(
     map: any,
 ){
-    readDataFromGeoJSON("interests.json").then((res) => {
+    readDataFromGeoJSON("polygon.json").then((res) => {
         let arr = GeoFeatures2Arr(res.data.features);
         let simPolygons = GeoPolygons2SimpleArr(arr);
 
@@ -26,7 +26,7 @@ export function function3(
             let icon = innerIcon(0);
             drawMultiPoint2BLMap(pois,map,icon);
 
-            let interests = simPolygons.slice(1,4); // 0 为总区域
+            let interests = simPolygons.slice(1,simPolygons.length);
 
             let result = []; // 三个区域的兴趣点
             let D = []; // 游客密度 人/ km^2
@@ -42,9 +42,9 @@ export function function3(
                     }
                 }
 
-                let area = SpherePolygonArea(interests[i]);
-                console.log(area);
-                D.push(count / area);
+                // let area = SpherePolygonArea(interests[i]);
+                // console.log(area);
+                D.push(count);
                 result.push(temp);
             }
 
@@ -56,7 +56,7 @@ export function function3(
                 drawSimplePolygon2Map(item,map,rapperColor(D[index],D));
             })
             showColorLegend(D,color);
-            addCom2Page(document.querySelector<HTMLDivElement>('#components')!,D,['A','B','C']);
+            addCom2Page(document.querySelector<HTMLDivElement>('#components')!,D,['']);
         });
     });
 
@@ -80,7 +80,7 @@ function addCom2Page(
     labels: string[]
   ){
     // 首先实例化组件
-    const flowInfo = new Flow(data,['A','B','C'],'逐地点');
+    const flowInfo = new Flow(data,['A','B','C','D','E'],'逐地点');
     // 然后将组件添加到页面中
     fatherContainer.appendChild(flowInfo);
   }

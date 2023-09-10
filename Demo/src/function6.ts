@@ -7,7 +7,6 @@ import { removeAllOverlay } from "./helpers/BLDraw";
  * QSF
  */
 export function function6(map: any){
-    console.log("function6");
     // 添加小组件
     addComPaths(document.querySelector<HTMLDivElement>('#components')!)
     const points = [

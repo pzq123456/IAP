@@ -3,11 +3,12 @@
  */
 import axios from 'axios';
 import * as RV from '../src/packages/rvgeo.js'
-import { drawRaster2BLMap } from './helpers/BLDraw.js';
+import { drawRaster2BLMap, removeAllOverlay } from './helpers/BLDraw.js';
 export function function8(
     map:any,
     mould : number = 1
     ){
+    removeAllOverlay(map);//清空地图
     axios.get('data.csv').then((res)=>{
         // create canvas and add it to component
         let components = document.querySelector<HTMLDivElement>('#components')!;
@@ -55,9 +56,12 @@ function mould2(
     myCanvas:HTMLCanvasElement,
     sourceGrid:RV.Raster.Raster
 ){
+    
+
     let grid2 = RV.Raster.fromMatrix(sourceGrid.getFlowDirection());
     let gridview2 = new RV.Renderer.GridView(myCanvas.getContext("2d"),grid2,0,191,297,0);
     gridview2.draw_dispersed_custom(myCanvas.height,true,RV.pan.CellValueRenderer.Stadard_Aspact,"坡向测试视图",9,1,0.1,[0,1,2,4,8,16,32,64,128]);
+
 }
 
 function mould3(
@@ -162,4 +166,28 @@ function anotationAspects(
       myCanvasCtx.fillText(text[i],textX[i],textY[i]);
       myCanvasCtx.closePath();
     }
+}
+
+function normalize(
+    max : number,
+    min : number,
+    value : number
+){
+    return (value - min)/(max - min);
+}
+
+function normalize2D(
+    array : number[][]
+){
+    let max = Math.max(...array.map((row)=>Math.max(...row)));
+    let min = Math.min(...array.map((row)=>Math.min(...row)));
+    let result = [];
+    for(let row of array){
+        let resultRow = [];
+        for(let value of row){
+            resultRow.push(normalize(max,min,value));
+        }
+        result.push(resultRow);
+    }
+    return result;
 }

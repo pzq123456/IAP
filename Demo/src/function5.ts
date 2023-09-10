@@ -49,7 +49,7 @@ export function function5(map: any,view:any){
         }
         //绘图
         Createheatmap(view,data);
-        drawMultiPoint2BLMap(pois,map);
+        drawMultiPoint2BLMap(pois,map,innerIcon(6));
 
     })
     

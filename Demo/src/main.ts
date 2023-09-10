@@ -50,7 +50,7 @@ createToolBar(document.querySelector<HTMLDivElement>('#toolBar')!, [
   { name: 'LJY', action: () =>  Fun.function5(map,view)},
   { name: 'QSF', action: () =>  Fun.function6(map)},
   { name: 'PZQ', action: () =>  Fun.function7(map)},
-  { name: '栅格', action: () =>  Fun.function8(map,3)},
+  { name: '栅格', action: () =>  Fun.function8(map,1)},
   { name: '组件', action: () =>  components1()},
   { name: '组件2', action: () =>  components2()},
   { name: '清除组件', action: () =>  removeComponents()},
@@ -148,10 +148,28 @@ function about(
     ]
   ]
 
+  let posts = [
+    [
+      '景点1',
+      'Lorem ipsum dolor sit amet, consectetur adipisci elit, sed eiusmod tempor incidunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur. Quis aute iure reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint obcaecat cupiditat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. ',
+      'https://th.bing.com/th/id/OIP.wJTY76nSSoIuGgPMirHxOwHaE6?w=281&h=186&c=7&r=0&o=5&pid=1.7'
+    ],
+    [
+      '景点2',
+      'Lorem ipsum dolor sit amet, consectetur adipisci elit, sed eiusmod tempor incidunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur. Quis aute iure reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint obcaecat cupiditat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. ',
+      'https://th.bing.com/th/id/OIP.olcJsUUpkoQZS5_XVWKP9AHaEL?w=330&h=186&c=7&r=0&o=5&pid=1.7'
+    ],
+    [
+      '景点3',
+      'Lorem ipsum dolor sit amet, consectetur adipisci elit, sed eiusmod tempor incidunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur. Quis aute iure reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint obcaecat cupiditat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. ',
+      'https://th.bing.com/th/id/OIP.01UVN2O7t0CZWrc5QP0IyAHaD6?w=300&h=180&c=7&r=0&o=5&pid=1.7'
+    ],
+  ]
+
   // 创建组件
-  const flowInfo = new About(member);
+  const about = new About(member,posts,fatherContainer);
   // 然后将组件添加到页面中
-  fatherContainer.appendChild(flowInfo);
+  fatherContainer.appendChild(about);
 }
 
 function testPost(){

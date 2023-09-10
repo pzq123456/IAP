@@ -3,27 +3,36 @@
  */
 import { GeoFeatures2Arr, GeoPolygons2SimpleArr, readDataFromGeoJSON } from "./Abstract/MetaData";
 import { Flow } from "./Components/Chart2";
-import { drawMultiPoint2BLMap, drawRoad2Map, drawSimplePolygon2Map, innerIcon } from "./helpers/BLDraw";
+import { drawMultiPoint2BLMap, drawRoad2Map, drawSimplePolygon2Map, innerIcon, removeAllOverlay } from "./helpers/BLDraw";
 import { PointInsidePolygon } from "./packages/CGUtils";
 import { N2C, showColorLegend } from "./packages/Colors";
 import { SpherePolygonArea } from "./packages/Distance";
 
+// const color = [
+//     "#00FF00",
+//     "#0000FF",
+//     "#FF0000",
+// ];
+// 增加颜色的透明度 降低饱和度
 const color = [
-    "#00FF00",
-    "#0000FF",
-    "#FF0000",
+    "RGBA(0,255,0,0.3)",
+    "RGBA(0,0,255,0.3)",
+    "RGBA(255,0,0,0.3)",
 ];
+
+
 
 export function function3(
     map: any,
 ){
+    removeAllOverlay(map);//清空地图
     readDataFromGeoJSON("polygon.json").then((res) => {
         let arr = GeoFeatures2Arr(res.data.features);
         let simPolygons = GeoPolygons2SimpleArr(arr);
 
         readDataFromGeoJSON("people1.json").then((res) => {
             let pois = GeoFeatures2Arr(res.data.features);
-            let icon = innerIcon(0);
+            let icon = innerIcon(5);
             drawMultiPoint2BLMap(pois,map,icon);
 
             let interests = simPolygons.slice(1,simPolygons.length);
@@ -43,13 +52,12 @@ export function function3(
                 }
 
                 // let area = SpherePolygonArea(interests[i]);
-                // console.log(area);
                 D.push(count);
                 result.push(temp);
             }
 
             result.forEach((item) => {
-                drawMultiPoint2BLMap(item,map);
+                drawMultiPoint2BLMap(item,map,innerIcon(6));
             });
 
             interests.forEach((item,index) => {
@@ -70,7 +78,13 @@ export function function3(
  * @returns - 颜色对象
  */
 function rapperColor(value:number, values:number[]){
-    let res = {fillColor: N2C(value,values,color) };
+    let res = {
+        fillColor: N2C(value,values,color) ,
+        strokeColor: N2C(value,values,color),
+        strokeWeight: 2,
+        strokeOpacity: 0.5,
+        fillOpacity: 0.3
+    };
     return res;
 }
 

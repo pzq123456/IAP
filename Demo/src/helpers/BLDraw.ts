@@ -206,7 +206,7 @@ export function drawRoad2Map(
     edges: [number, number, number][], // 起点 终点 权重
     hightlight: number[], // 高亮节点 [0,1,2] ==> 0 --> 1 -->2
     map: any,
-    nodeIcon: any = innerIcon(0),
+    nodeIcon: any = innerIcon(6),
     roadStyle: Object = { strokeColor: "blue", strokeWeight: 2, strokeOpacity: 0.5},
     hightlightStyle: Object = { strokeColor: "yellow", strokeWeight: 5, strokeOpacity: 0.5}
 ){
@@ -227,7 +227,7 @@ export function drawRoad2Map(
     if(hightlight.length > 0){
         let lineStrings = fillIndexArray(hightlight,nodes);
         drawLineString2BLMap(lineStrings,map,hightlightStyle,false);
-        drawPoint2BLMap(lineStrings[0],map,innerIcon(1));
+        drawPoint2BLMap(lineStrings[0],map,innerIcon(4));
         drawPoint2BLMap(lineStrings[lineStrings.length - 1],map,innerIcon(2));
     }
 

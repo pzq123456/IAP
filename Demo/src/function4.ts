@@ -1,16 +1,65 @@
 import { GeoFeatures2Arr, readDataFromGeoJSON } from "./Abstract/MetaData";
-import { drawMultiPoint2BLMap, drawPoint2BLMap, innerIcon, innerIconURL } from "./helpers/BLDraw";
+import { drawEdgeMap2BLMap, drawMultiPoint2BLMap, drawPoint2BLMap, drawPolygon2BLMap, drawTriangleEdge2BLMap, innerIcon, innerIconURL } from "./helpers/BLDraw";
 import { haversine } from "./packages/Distance";
 import { createMultiPointFromArr } from "./packages/MetaData";
 import { showIconLegend } from "./packages/Colors";
 import { Post } from "./Components/Post";
+import { Delaunator, Voronoi, triangleCenter } from "./packages/Delaunay";
+import { getPointsMBR } from "./packages/Geometry";
+import { fillIndexArray } from "./packages/constants/Utils";
+import { convertToMercators } from "./packages/Referencing";
 
 /**
  * ZQY
  */
+
+const extend = 
+    [
+      [
+        -107.96481533627262,
+        38.716851546431684
+      ],
+      [
+        -107.96481533627262,
+        38.616574823524275
+      ],
+      [
+        -107.81006857689933,
+        38.616574823524275
+      ],
+      [
+        -107.81006857689933,
+        38.716851546431684
+      ],
+      [
+        -107.96481533627262,
+        38.716851546431684
+      ]
+    ];
+
+
 export function function4(map: any){
     readDataFromGeoJSON("shop.json").then((res) => {
         let pois = GeoFeatures2Arr(res.data.features);
+
+        let tmpPois = [...pois,...extend];
+        // let del = Delaunator.from(pois);
+        // let trs = fillIndexArray(del.getTriangleIndices(), pois);
+        // let trc = triangleCenter(pois,del,0);
+        // drawPoint2BLMap(trc, map);
+        // drawTriangleEdge2BLMap(trs, map, {strokeColor: 'blue'});
+
+        // 添加四角远处的点 计算voironoi
+        let poiXY = convertToMercators(tmpPois);
+        console.log(poiXY);
+        let del2 = Delaunator.from(poiXY);
+        let vor = new Voronoi(del2);
+        let voi = vor.cutVoronoiByMBR(getPointsMBR(pois));
+        voi = delNullVoi(voi);
+        // console.log(voi.get(0));
+        // drawPolygon2BLMap([voi.get(4)],map,{ fillColor: "yellow", fillOpacity: 0.5 });
+        // drawEdgeMap2BLMap(voi, map,{ strokeColor: "green", strokeWeight: 2, strokeOpacity: 0.5 },true);
+
         let multip = createMultiPointFromArr(pois);
         let XMLoc = multip.calculateCentroid(); // 小明的位置
         let XMIcon = innerIcon(8);
@@ -25,11 +74,16 @@ export function function4(map: any){
             '#00FF00',
             '#FFFF00',
             '#FF0000'
-        ]
+        ];
+
         for(let i = 0; i < pois.length; i++){
             let color = distance2ColorIndex(i,D);
-            let marker = drawPoint2BLMap(pois[i],map,innerIcon(color));
+            let marker = drawPoint2BLMap(pois[i],map,innerIcon(color)); // 按照距离绘制商店（着色）
 
+            // 绘制出 voi 区域并着色
+            let tmpPoly = [voi.get(i)];
+
+            drawPolygon2BLMap(tmpPoly,map,{ fillColor: bgcolor[color - 1], fillOpacity: 0.1, strokeColor: bgcolor[color - 1], strokeWeight: 2, strokeOpacity: 0.6 });
             // 添加点击事件
             marker.addEventListener('click',function(){
                 // 创建组件
@@ -38,7 +92,7 @@ export function function4(map: any){
                     D[i],
                     randomPeopleFlow(11),
                     ['6:00','7:00','8:00','9:00','10:00','11:00','12:00','13:00','14:00','15:00','16:00'],
-                    '餐饮摊位',
+                    `${i}-餐饮摊位`,
                     '时间'
                 );
                 // 然后将组件添加到地图上
@@ -48,8 +102,8 @@ export function function4(map: any){
                     height: 430,     // 信息窗口高度
                 });
                 map.openInfoWindow(infoWindow,marker.getPosition());
-            }
-            )
+            })
+
         }
 
         showIconLegend(D,[innerIconURL(1),innerIconURL(2),innerIconURL(3)]);
@@ -109,4 +163,17 @@ function normalDistribution(
 ){
     let res = 1 / (o * Math.sqrt(2 * Math.PI)) * Math.exp(- (x - u) * (x - u) / (2 * o * o));
     return res;
+}
+
+
+function delNullVoi(
+    voiMap : Map<number, number[][]>
+){
+    // 若voiMap中的voi为空 则删除
+    for(let [key,value] of voiMap){
+        if(value.length == 0){
+            voiMap.delete(key);
+        }
+    }
+    return voiMap;
 }

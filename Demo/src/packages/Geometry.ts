@@ -23,6 +23,32 @@ export function mbrToPolygon(mbr:MBR): [number,number][] {
         [minLon, minLat]
     ];
 }
+
+/**
+ * 计算多点的最小外包矩形
+ * @param points - 多点
+ * @returns {MBR} 返回最小外包矩形 [minLon, minLat, maxLon, maxLat]
+ */
+export function getPointsMBR(
+    points: [number, number][]
+): MBR{
+    let minLon = Infinity, minLat = Infinity, maxLon = -Infinity, maxLat = -Infinity;
+    for(let i = 0; i < points.length; i++){
+        let lon = points[i][0];
+        let lat = points[i][1];
+        minLon = Math.min(minLon, lon);
+        minLat = Math.min(minLat, lat);
+        maxLon = Math.max(maxLon, lon);
+        maxLat = Math.max(maxLat, lat);
+    }
+    return [minLon, minLat, maxLon, maxLat];
+}
+
+
+
+
+
+
 /**
  * 图形基类（抽象类）
  * - 该类定义了一些图形共有的方法及属性

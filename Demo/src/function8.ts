@@ -101,7 +101,9 @@ function parseData(data:string){
 
 function createLegend(
     father:HTMLDivElement = document.querySelector<HTMLDivElement>('.Legend')!,
-){
+){  
+    // 首先清空
+    father.innerHTML = '';
     // create canvas and add it to component
     let myCanvas = document.createElement('canvas');
     myCanvas.height = father.clientHeight;

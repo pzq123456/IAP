@@ -7,6 +7,7 @@ import { Flow } from './Components/Chart2.ts';
 import { About } from './Components/About.ts';
 import { PathsCom } from './Components/Paths.ts';
 import { Weather } from './Components/weather.ts';
+import { TOD, TODNode } from './Components/Tod.ts';
 
 declare const BMapGL: any;
 
@@ -26,6 +27,8 @@ const componentsArr = [
   ['about-info', About],
   ['paths-info', PathsCom],
   ['weather-info', Weather],
+  ['tod-node',TODNode],
+  ['to-d',TOD]
 ] as [string, any][]; 
 
 registerComponents(componentsArr);
@@ -51,12 +54,10 @@ createToolBar(document.querySelector<HTMLDivElement>('#toolBar')!, [
   { name: 'QSF', action: () =>  Fun.function6(map)},
   { name: 'PZQ', action: () =>  Fun.function7(map)},
   { name: '栅格', action: () =>  Fun.function8(map,1)},
-  { name: '组件', action: () =>  components1()},
-  { name: '组件2', action: () =>  components2()},
   { name: '清除组件', action: () =>  removeComponents()},
   { name: 'toggle组件', action: () =>  toggleComponent()},
-  { name: 'testPost', action: () =>  testPost()},
   { name: '关于', action: () =>  about()},
+  { name: 'test', action: () =>  testPost()},
 ],20)
 // =============END================ 
 
@@ -173,15 +174,12 @@ function about(
 }
 
 function testPost(){
-  // 创建组件
-  const post = new Post(
-    'orange',
-    100,
-    [1,2,3,4,5,6,5,4,3,2,1],
-    ['1','2','3','4','5','6','7','8','9','10','11'],
-    'test',
-    'test'
-  );
-  // 然后将组件添加到页面中
-  document.body.appendChild(post);
+  let data = [
+    ["LM","dsadasdasds","red"],
+    ["ZQY","dsadasdasds","blue"],
+    ["LJY","dsadasdasds","green"],
+    ["pzq","dsadasdasds","yellow"]
+  ]
+  const tod = new TOD(data);
+  document.querySelector<HTMLDivElement>('#components')!.appendChild(tod);
 }

@@ -34,11 +34,12 @@ export class About extends HTMLElement {
         style.textContent = `
         .wrapper{
             width: 100%;
-            height: 100%;
-            background-color: white;
+            height: 920px;
+            background-color: rgb(255, 255, 255, 0.5);
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0,0,0,0.5);
             overflow: auto;
+
         }
         
         .closeButton{
@@ -126,6 +127,98 @@ export class About extends HTMLElement {
         );
         wrapper.appendChild(postWrapper);
         wrapper.appendChild(memberWrapper);
+
+        let memberStyle = document.createElement('style');
+        memberStyle.textContent = `
+        .memberWrapper{
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+          }
+
+          .memberTitle{
+            font-size: 30px;
+            font-weight: bold;
+          }
+
+          .memberDiv{
+            width: 100%;
+            height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+          }
+
+          .memberName{
+            font-size: 20px;
+            font-weight: bold;
+            margin-right: 20px;
+          }
+
+          .memberLink{
+            width: 100px;
+            height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+          }
+
+          .memberImg{
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+          }          
+          `;
+
+        let postStyle = document.createElement('style');
+        postStyle.textContent = `
+        .postWrapper{
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+          }
+
+          .postTitle{
+            font-size: 30px;
+            font-weight: bold;
+          }
+
+          .postDiv{
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+          }
+
+          .postName{
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 20px;
+          }
+
+          .postText{
+            border: 1px solid black;
+            border-radius: 10px;
+            background-color: rgb(255, 255, 255, 0.5);
+          }
+
+          .postImg{
+            border-radius: 10px;
+          }
+
+          `;
+
+        shadow.appendChild(memberStyle);
+        shadow.appendChild(postStyle);
+
     }
 }
 

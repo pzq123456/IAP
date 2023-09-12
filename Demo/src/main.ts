@@ -56,10 +56,10 @@ createToolBar(document.querySelector<HTMLDivElement>('#toolBar')!, [
   { name: '热力图', action: () =>  Fun.function5(map,view)},
   { name: '最短路径查询', action: () =>  Fun.function6(map)},
   { name: '栅格', action: () =>  Fun.function8(map)},
-  { name: '清除组件', action: () =>  removeComponents()},
   { name: 'toggle组件', action: () =>  toggleComponent()},
   { name: '关于', action: () =>  about()},
-  { name: 'test', action: () =>  testPost()},
+  { name: '清除组件', action: () =>  removeComponents()},
+  // { name: 'test', action: () =>  testPost()},
 ],20)
 // =============END================ 
 
@@ -92,6 +92,8 @@ function removeComponents(
 ){
   // 从页面中移除所有组件
   fatherContainer.innerHTML = '';
+  // 顺便清空画布
+  map.clearOverlays();
 }
 
 /**

@@ -23,3 +23,19 @@
     /Renderer （渲染 开发中）
     /Shell （壳算法 包括凸包和凸壳）
 ```
+
+```mermaid
+graph TB
+    A[RVGeo] --> B[constants]
+    A --> C[CGUtils]
+    A --> D[Cluster]
+    A --> E[Colors]
+    A --> F[Delaunay]
+    A --> G[Dijkstra]
+    A --> H[Distance]
+    A --> I[Geometry]
+    A --> J[MetaData]
+    A --> K[Referencing]
+    A --> L[Renderer]
+    A --> M[Shell]
+```

@@ -36,4 +36,20 @@ export class PathsCom extends HTMLElement{
         this.source=source
         this.target=target
     }
+
+    addDistanceDiV(
+        star: number,
+        end: number,
+        distance: number,
+    ){
+        const div = document.createElement('div');
+        div.innerHTML = `
+        <div class="distance">
+            <div class="distance-star">${star}</div>
+            <div class="distance-end">${end}</div>
+            <div class="distance-distance">${distance}</div>
+        </div>
+        `;
+        this.appendChild(div);
+    }
 }

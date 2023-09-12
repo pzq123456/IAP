@@ -12,8 +12,7 @@ export class BtnList extends HTMLElement{
         style.textContent = `
         .wrapper{
             width: 100%;
-            height: 100%;
-            background-color: rgb(255, 255, 255, 0.5);
+            height: 50%;
             border-radius: 10px;
             overflow: auto;
         }
@@ -47,7 +46,7 @@ export class BtnNode extends HTMLElement{
         const style = document.createElement('style');
         style.textContent = `
         .wrapper{
-            width: 100%;
+            width: 99%;
             height: 60px;
             background-color: rgb(255, 255, 255, 0.5);
             border-radius: 10px;

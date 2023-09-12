@@ -23,7 +23,6 @@ const color = [
 ];
 
 export function function3(map: any){
-
     createBtnList([
         {'name': '加载景点多边形', 'action': () => step1(map)},
         {'name': '加载游客位置', 'action': () => step2(map)},
@@ -101,7 +100,7 @@ function step3(map){
                     }
             }
 
-            // let area = SpherePolygonArea(interests[i]);
+            let area = SpherePolygonArea(interests[i]);
             D.push(count);
             result.push(temp);
         }
@@ -114,7 +113,7 @@ function step3(map){
             drawSimplePolygon2Map(item,map,rapperColor(D[index],D));
         })
         showColorLegend(D,color);
-        addCom2Page(document.querySelector<HTMLDivElement>('#components')!,D,['']);
+        addCom2Page(document.querySelector<HTMLDivElement>('#components')!,D,['A','B','C','D','E'],"逐地点");
         });
     });
 }
@@ -167,8 +166,8 @@ function step4(map){
                     }
             }
 
-            // let area = SpherePolygonArea(interests[i]);
-            D.push(count);
+            let area = SpherePolygonArea(interests[i]);
+            D.push(count/area);
             result.push(temp);
         }
 
@@ -180,7 +179,7 @@ function step4(map){
             drawSimplePolygon2Map(item,map,rapperColor(D[index],D));
         })
         showColorLegend(D,color);
-        addCom2Page(document.querySelector<HTMLDivElement>('#components')!,D,['']);
+        addCom2Page(document.querySelector<HTMLDivElement>('#components')!,D,['A','B','C','D','E'],'游客密度（人每平方公里）');
         });
     });
 }
@@ -189,10 +188,11 @@ function step4(map){
 function addCom2Page(
     fatherContainer: HTMLDivElement = document.querySelector<HTMLDivElement>('#components')!,
     data: number[],
-    labels: string[]
+    labels: string[],
+    name: string = '逐地点'
   ){
     // 首先实例化组件
-    const flowInfo = new Flow(data,['A','B','C','D','E'],'逐地点');
+    const flowInfo = new Flow(data,labels,name);
     // 然后将组件添加到页面中
     fatherContainer.appendChild(flowInfo);
   }

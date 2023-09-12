@@ -27,26 +27,8 @@ export function function5(map: any,view:any){
 
         //聚类
         let groups = K_means(300,10,1000,arr);
-        for(let i = 0 ; i < groups.length ; i++){
-    
-            let mps = new MultiPoint(groups[i]);
-            //drawMultiPoint2BLMap(mps, map);
-            let cent=mps.calculateCentroid();
-            //drawPoint2BLMap(mps.calculateCentroid(), map);
-            let lat=cent.lat;
-            let lon=cent.lon;
-    
-            data.push({
-                geometry:{
-                    type: 'Point',
-                    coordinates: [lon.toString(), lat.toString()]
-                },
-                properties:{
-                    count: (groups[i].length*0.06).toString()
-                    
-                }
-            })
-        }
+        
+        Createdata(groups,data);
         //绘图
         Createheatmap(view,data);
         drawMultiPoint2BLMap(pois,map,innerIcon(6));
@@ -55,6 +37,28 @@ export function function5(map: any,view:any){
     
     //组件
     addCom2Page(document.querySelector<HTMLDivElement>('#components')!);
+}
+
+function Createdata(groups:any,data:any){
+    for(let i = 0 ; i < groups.length ; i++){
+    
+        let mps = new MultiPoint(groups[i]);
+        let cent=mps.calculateCentroid();
+        //drawPoint2BLMap(mps.calculateCentroid(), map);
+        let lat=cent.lat;
+        let lon=cent.lon;
+
+        data.push({
+            geometry:{
+                type: 'Point',
+                coordinates: [lon.toString(), lat.toString()]
+            },
+            properties:{
+                count: (groups[i].length*0.06).toString()
+                
+            }
+        })
+    }
 }
 
 function addCom2Page(

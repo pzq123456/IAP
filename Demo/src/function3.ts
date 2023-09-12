@@ -25,11 +25,11 @@ const color = [
 export function function3(map: any){
 
     createBtnList([
-        {'name': 'step1', 'action': () => step1(map)},
-        {'name': 'step2', 'action': () => step2(map)},
-        {'name': 'step3', 'action': () => step3(map)},
-        {'name': 'step4', 'action': () => step4(map)},
-        {'name': 'step5', 'action': () => map.clearOverlays()}
+        {'name': '加载景点多边形', 'action': () => step1(map)},
+        {'name': '加载游客位置', 'action': () => step2(map)},
+        {'name': '渲染多边形并计算游客数量', 'action': () => step3(map)},
+        {'name': '计算游客密度', 'action': () => step4(map)},
+        {'name': '清空地图', 'action': () => map.clearOverlays()}
     ]);
 }
 
@@ -50,10 +50,18 @@ function step1(map){ //加载数据
 }
 
 function step2(map){
+    // load data
     removeAllOverlay(map);//清空地图
     readDataFromGeoJSON("polygon.json").then((res) => {
+        // 向地图上添加景点多边形
         let arr = GeoFeatures2Arr(res.data.features);
         let simPolygons = GeoPolygons2SimpleArr(arr);
+        // 去掉第一个元素
+        simPolygons = simPolygons.slice(1,simPolygons.length);
+        simPolygons.forEach((item) => {
+            drawSimplePolygon2Map(item,map,rapperColor(0,[0,1,2]));
+        }
+        );
     });
 
     readDataFromGeoJSON("people1.json").then((res) => {
@@ -79,6 +87,8 @@ function step3(map){
 
         let result = []; // 三个区域的兴趣点
         let D = []; // 游客密度 人/ km^2
+
+        //for循环计算多边形中游客的数量
         for(let i = 0; i < interests.length ; i++){
             let temp = [];
             let count = 0; // 兴趣点个数
@@ -95,10 +105,40 @@ function step3(map){
             D.push(count);
             result.push(temp);
         }
-            
+
+        result.forEach((item) => {
+            drawMultiPoint2BLMap(item,map,innerIcon(6));
+        });
+    
+        interests.forEach((item,index) => {
+            drawSimplePolygon2Map(item,map,rapperColor(D[index],D));
+        })
+        showColorLegend(D,color);
+        addCom2Page(document.querySelector<HTMLDivElement>('#components')!,D,['']);
         });
     });
 }
+
+
+
+
+/**
+ * 根据数值返回颜色(对象)
+ * @param value - 数值
+ * @param values - 数值范围(数组)
+ * @returns - 颜色对象
+ */
+function rapperColor(value:number, values:number[]){
+    let res = {
+        fillColor: N2C(value,values,color) ,
+        strokeColor: N2C(value,values,color),
+        strokeWeight: 2,
+        strokeOpacity: 0.5,
+        fillOpacity: 0.3
+    };
+    return res;
+}
+
 
 function step4(map){
     removeAllOverlay(map);//清空地图
@@ -145,23 +185,6 @@ function step4(map){
     });
 }
 
-
-/**
- * 根据数值返回颜色(对象)
- * @param value - 数值
- * @param values - 数值范围(数组)
- * @returns - 颜色对象
- */
-function rapperColor(value:number, values:number[]){
-    let res = {
-        fillColor: N2C(value,values,color) ,
-        strokeColor: N2C(value,values,color),
-        strokeWeight: 2,
-        strokeOpacity: 0.5,
-        fillOpacity: 0.3
-    };
-    return res;
-}
 
 function addCom2Page(
     fatherContainer: HTMLDivElement = document.querySelector<HTMLDivElement>('#components')!,

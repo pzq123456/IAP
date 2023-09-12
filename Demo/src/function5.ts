@@ -13,10 +13,6 @@ import { createBtnList } from "./Components/BtnList";
 import { convexHull } from './packages/Shell.ts';
 
 export function function5(map: any,view:any){
-    //1.kmeans聚类
-    //2.求聚类质心
-    //3.热力图
-    //参数
     createBtnList([
         {'name': '加载数据', 'action': () => step1(map,view)},
         {'name': 'k-means聚类', 'action': () => step2(map,view)},
@@ -24,26 +20,14 @@ export function function5(map: any,view:any){
         {'name': 'clear', 'action': () => clearview(map,view)},
         {'name': '天气', 'action': () => step4()}
     ]);
-
-    // readDataFromGeoJSON("people1.json").then((res) => {
-    //     let pois = GeoFeatures2Arr(res.data.features);
-    //     let mps = new MultiPoint(pois);
-    //     let arr= mps.toArray();
-
-    //     //聚类
-    //     let groups = K_means(300,10,1000,arr);
-        
-        
-    //     drawMultiPoint2BLMap(pois,map,innerIcon(6));
-
-    // })
-    
 }
+
 function clearview(map:any,view:any){
 
     removeAllOverlay(map);//清空地图
     view.removeAllLayers();
 }
+
 function step1(map:any,view:any){
     //加载数据
     clearview(map,view);
@@ -54,6 +38,7 @@ function step1(map:any,view:any){
         drawMultiPoint2BLMap(pois,map,innerIcon(6));
     })
 }
+
 function step2(map:any,view:any){
     clearview(map,view);
     //k-means聚类
@@ -83,6 +68,7 @@ function step2(map:any,view:any){
         }
     })
 }
+
 function step3(map:any,view:any){
     //热力图
     clearview(map,view);
@@ -97,6 +83,7 @@ function step3(map:any,view:any){
         Createheatmap(view,data);
     })
 }
+
 function step4(){
     addCom2Page(document.querySelector<HTMLDivElement>('#components')!);
 }

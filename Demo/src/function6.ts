@@ -3,6 +3,9 @@ import { Dijkstra } from "./packages/Dijkstra";
 import { haversine } from "./packages/Distance";
 import { PathsCom } from "./Components/Paths";
 import { removeAllOverlay } from "./helpers/BLDraw";
+// import { Floyd_Warshall } from "./packages/Floyd";
+import { Floyd_Warshall } from "./packages/Floyd";
+import { innerIcon } from "./helpers/BLDraw";
 /**
  * QSF
  */
@@ -33,8 +36,6 @@ export function function6(map: any){
 
     const edges = [
         [0, 1],
-        [0, 8],
-        [1, 5],
         [1, 6],
         [2, 5],
         [2, 6],
@@ -42,36 +43,53 @@ export function function6(map: any){
         [3, 5],
         [3, 8],
         [4, 5],
-        [4, 8],
-        [7, 4],
+        
     ] as [number, number][];
+    
+    var EdgesWithWeight = addDistance2Edge(points, edges, haversine);
 
-    let paths_button = document.getElementById("paths_button");
+    let dijkstra_button = document.getElementById("dijkstra_button");
+    let floyd_button = document.getElementById("floyd_button");
+    
+    console.log(floyd_button);
 
-    console.log("paths_button");
-    console.log(paths_button);
-
-    paths_button?.addEventListener('click',function(){
+    dijkstra_button?.addEventListener('click',function(){
         removeAllOverlay(map)
         // 获取源点选项值
         var source = getSelecValue('#paths_selectSource')
         // 获取目标点选项值
         var target = getSelecValue('#paths_selectTarget')
-        
         console.log(source,target)
-        let EdgesWithWeight = addDistance2Edge(points, edges, haversine);
-        console.log(EdgesWithWeight);
+        // var EdgesWithWeight = addDistance2Edge(points, edges, haversine);
+        // console.log(EdgesWithWeight);
         let dijkstra = new Dijkstra(EdgesWithWeight, source);
         let [path, length] = dijkstra.dijkstra(target);
         path as number[];
         console.log(path);
         drawRoad2Map(points, edges, path, map)
-
-        
     })
 
-    var all_Paths = Floyd()
-    console.log(all_Paths)
+    floyd_button?.addEventListener('click',function(){
+        removeAllOverlay(map)
+        // 获取所有顶点的选项值
+        let source = getSelecValue('#paths_selectVertices')
+        // Floyd算法
+        let floyd = new Floyd_Warshall(9, EdgesWithWeight)
+        let paths:any[] = floyd.floyd_warshall()
+        console.log(paths[source])
+        
+        // drawRoad2Map(points, edges, paths[source], map, innerIcon(0), Object = { strokeColor: "blue", strokeWeight: 2, strokeOpacity: 0.5 },)
+        for(let i=0;i<paths[source].length;i++){
+            // let color:any = setRandomColor(paths[source].length)
+            // let color = setRandomColor(paths[source].length)
+            drawRoad2Map(points, edges, paths[source][i], map, innerIcon(0), { strokeColor: "blue", strokeWeight: 2, strokeOpacity: 0.5 }, { strokeColor: getRandomColor(), strokeWeight: 5, strokeOpacity: 0.5 })
+        }
+        // console.log(setRandomColor(6))
+
+    })
+
+    
+    
     
 }
 
@@ -112,27 +130,9 @@ function getSelecValue (selectID:string) {
     return selectValue
 }
 
-
-function Floyd(){
-    var graph = [];
-    // 初始化操作，顶点点自身权重为0，到其他点权重初始化为无穷大
-    for (let i = 0; i < 10; ++i) {
-        graph.push([]);
-        for (let j = 0; j < 10; ++j)
-            graph[i].push(i == j ? 0 : 999999999);
-    }
-
-    for (let i = 1; i < 10; ++i) {
-        graph[0][i] = graph[i][0] = parseInt(Math.random() * 9 + 1);
-    }
-
-    for (let k = 0; k < 10; ++k) {
-        for (let i = 0; i < 10; ++i) {
-            for (let j = 0; j < 10; ++j) {
-                if (graph[i][j] > graph[i][k] + graph[k][j])
-                    graph[i][j] = graph[i][k] + graph[k][j]
-            }
-        }
-    }
-    return graph
+function getRandomColor() {
+    const colors = ["red", "green", "yellow", "orange", "pink", "silver","white"];
+    const randomColor = colors[Math.floor(Math.random() * colors.length)];
+    return randomColor;
 }
+

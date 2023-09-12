@@ -40,6 +40,12 @@ function step1(map){ //加载数据
         // 向地图上添加景点多边形
         let arr = GeoFeatures2Arr(res.data.features);
         let simPolygons = GeoPolygons2SimpleArr(arr);
+        // 去掉第一个元素
+        simPolygons = simPolygons.slice(1,simPolygons.length);
+        simPolygons.forEach((item) => {
+            drawSimplePolygon2Map(item,map,rapperColor(0,[0,1,2]));
+        }
+        );
     });
 }
 

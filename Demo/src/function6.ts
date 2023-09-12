@@ -12,6 +12,7 @@ import { innerIcon } from "./helpers/BLDraw";
 export function function6(map: any){
     // 添加小组件
     let com = addComPaths(document.querySelector<HTMLDivElement>('#components')!);
+
     const points = [
         //0
         [-107.8557944859051, 38.68187126977591],
@@ -54,6 +55,7 @@ export function function6(map: any){
 
     dijkstra_button?.addEventListener('click',function(){
         removeAllOverlay(map)
+        
         // 获取源点选项值
         var source = getSelecValue('#paths_selectSource')
         // 获取目标点选项值
@@ -63,7 +65,10 @@ export function function6(map: any){
         // console.log(EdgesWithWeight);
         let dijkstra = new Dijkstra(EdgesWithWeight, source);
         let [path, length] = dijkstra.dijkstra(target);
+        
         path as number[];
+        com.addDistanceDiV(source, target, length)
+        
         console.log(path);
         drawRoad2Map(points, edges, path, map)
     })

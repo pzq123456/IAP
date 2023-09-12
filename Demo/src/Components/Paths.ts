@@ -9,6 +9,7 @@ export class PathsCom extends HTMLElement{
         this.innerHTML = `
         <div class="chart-container" style="position: relative; height:100px; width:500px">
             
+        <div class="dijkstra_div">
         <p>Dijkstra算法:</p>
         <select id="paths_selectSource" style="width:100px">
             <option value="0">0</option>
@@ -33,6 +34,8 @@ export class PathsCom extends HTMLElement{
             <option value="8">8</option>
         </select>
         <button id="dijkstra_button">单源最短路径</button>
+        </div>
+        <div class="floyd_div">
         <p>Floyd算法:</p>
         <select id="paths_selectVertices" style="width:100px">
             <option value="0">0</option>
@@ -47,22 +50,37 @@ export class PathsCom extends HTMLElement{
         </select>
         <button id="floyd_button">多源最短路径</button>
         </div>
+        </div>
         `;
         this.source=source
         this.target=target
     }
 
+    // 应用DistanceDiV时先清除
+    // clearDistanceDiV(){
+    //     let div = document.querySelector(".distance")
+    //     document.
+    //     }
     addDistanceDiV(
         star: number,
         end: number,
         distance: number,
     ){
+        // 添加组件时先删除某些元素
+        // 获取要删除的元素
+        const element = document.querySelector(".distance")
+
+        // 检查元素是否存在
+        if (element) {
+            // 从父元素中删除该元素
+            element.parentNode.removeChild(element);
+        }
         const div = document.createElement('div');
 
         // distance 保留两位小数
         distance = Math.round(distance * 100) / 100;
-
-
+        // const preElement = document.querySelector("#floyd_button")
+        // preElement?.appendChild(element)
         div.innerHTML = `
         <div class="distance">
             <div class="distance-star"> 起点： ${star} </div>
@@ -105,5 +123,6 @@ export class PathsCom extends HTMLElement{
         `;
         this.appendChild(style);
         this.appendChild(div);
+        
     }
 }

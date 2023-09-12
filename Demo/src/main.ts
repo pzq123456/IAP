@@ -8,6 +8,7 @@ import { About } from './Components/About.ts';
 import { PathsCom } from './Components/Paths.ts';
 import { Weather } from './Components/weather.ts';
 import { TOD, TODNode } from './Components/Tod.ts';
+import { BtnList, BtnNode, createBtnList } from './Components/BtnList.ts';
 
 declare const BMapGL: any;
 
@@ -28,7 +29,9 @@ const componentsArr = [
   ['paths-info', PathsCom],
   ['weather-info', Weather],
   ['tod-node',TODNode],
-  ['to-d',TOD]
+  ['to-d',TOD],
+  ['btn-list',BtnList],
+  ['btn-node',BtnNode]
 ] as [string, any][]; 
 
 registerComponents(componentsArr);
@@ -174,12 +177,16 @@ function about(
 }
 
 function testPost(){
-  let data = [
-    ["LM","dsadasdasds","red"],
-    ["ZQY","dsadasdasds","blue"],
-    ["LJY","dsadasdasds","green"],
-    ["pzq","dsadasdasds","yellow"]
+  let btnInfo = [
+    {name:'test1',action:()=>{console.log('test1')}},
+    {name:'test2',action:()=>{console.log('test2')}},
+    {name:'test3',action:()=>{console.log('test3')}},
+    {name:'test4',action:()=>{console.log('test4')}},
+    {name:'test5',action:()=>{console.log('test5')}},
   ]
-  const tod = new TOD(data);
-  document.querySelector<HTMLDivElement>('#components')!.appendChild(tod);
+  const btnList = new BtnList(btnInfo);
+  // conponent.appendChild(btnList);
+  // let compo = document.querySelector<HTMLDivElement>('#components')!;
+  // compo.appendChild(btnList);
+  createBtnList(btnInfo);
 }

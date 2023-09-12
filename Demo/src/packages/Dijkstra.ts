@@ -19,8 +19,9 @@ export class Dijkstra {
      * @returns [paths,length]——源点到目标点的路径和距离(总权重)
      */
     dijkstra = (target) => {
+        // 存放未访问的顶点
         const Q = new Set(),
-            // 存放未访问的顶点
+        // 存放访问点的前所有点——即源点到某点的途径点
             prev = {},
             // 存放所有起点到其他点的权重
             dist = {},

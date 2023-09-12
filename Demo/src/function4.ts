@@ -41,7 +41,7 @@ const extend =
 export function function4(map: any){
     readDataFromGeoJSON("shop.json").then((res) => {
         let pois = GeoFeatures2Arr(res.data.features);
-
+        console.log(pois)
         let tmpPois = [...pois,...extend];
         // let del = Delaunator.from(pois);
         // let trs = fillIndexArray(del.getTriangleIndices(), pois);

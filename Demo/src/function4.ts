@@ -7,7 +7,8 @@ import { Post } from "./Components/Post";
 import { Delaunator, Voronoi, triangleCenter } from "./packages/Delaunay";
 import { getPointsMBR } from "./packages/Geometry";
 import { fillIndexArray } from "./packages/constants/Utils";
-import { convertToMercators } from "./packages/Referencing";
+import { convertToMercators, convertToWgs84 } from "./packages/Referencing";
+import { createBtnList } from "./Components/BtnList";
 
 /**
  * ZQY
@@ -39,8 +40,69 @@ const extend =
 
 
 export function function4(map: any){
+
+    createBtnList([
+        {'name': 'step1', 'action': () => step1(map)},
+        {'name': 'step2', 'action': () => step2(map)},
+        {'name': 'step3', 'action': () => step3(map)},
+        {'name': 'step4', 'action': () => step4(map)},
+        {'name': 'clear', 'action': () => map.clearOverlays()}
+    ]);
+}
+
+function step1(map){ // 加载数据
+    // load data
+    readDataFromGeoJSON("shop.json").then((res) => {
+        // 向地图上添加点
+        let pois = GeoFeatures2Arr(res.data.features);
+        let icon = innerIcon(7);
+        drawMultiPoint2BLMap(pois,map,icon); // 绘制商店
+        let multip = createMultiPointFromArr(pois);
+        let XMLoc = multip.calculateCentroid(); // 小明的位置
+        let XMIcon = innerIcon(8);
+        drawPoint2BLMap(XMLoc,map,XMIcon); // 绘制小明
+    });
+}
+
+function step2(map){ // 求解狄罗妮三角网并计算三角形中心
+    // load data
+    readDataFromGeoJSON("shop.json").then((res) => {
+        // 向地图上添加点
+        let pois = GeoFeatures2Arr(res.data.features);
+        let tmpPois = [...pois,...extend];
+        let poiXY = convertToMercators(tmpPois);
+        let del = Delaunator.from(poiXY);
+        let trs = fillIndexArray(del.getTriangleIndices(), tmpPois);
+        // draw triangle center
+        for(let i = 0; i < trs.length; i++){
+            let trc = triangleCenter(poiXY,del,i,convertToWgs84);
+            drawPoint2BLMap(trc, map,innerIcon(4));
+        }
+        drawTriangleEdge2BLMap(trs, map, {strokeColor: 'blue', strokeWeight: 2, strokeOpacity: 0.5});
+    });
+}
+
+function step3(map){ // 绘制voironoi图 裁剪
+    // load data
+    readDataFromGeoJSON("shop.json").then((res) => {
+        // 向地图上添加点
+        let pois = GeoFeatures2Arr(res.data.features);
+        let tmpPois = [...pois,...extend];
+        let poiXY = convertToMercators(tmpPois);
+        let del = Delaunator.from(poiXY);
+        let vor = new Voronoi(del);
+        let voi = vor.cutVoronoiByMBR(getPointsMBR(pois));
+        voi = delNullVoi(voi);
+
+        drawPolygon2BLMap(voi.get(0),map,{ fillColor: "yellow", fillOpacity: 0.5 });
+        drawEdgeMap2BLMap(voi, map,{ strokeColor: "green", strokeWeight: 2, strokeOpacity: 0.5 },true);
+    });
+}
+
+function step4(map){ // 计算距离并着色
     readDataFromGeoJSON("shop.json").then((res) => {
         let pois = GeoFeatures2Arr(res.data.features);
+
 
         let tmpPois = [...pois,...extend];
         // let del = Delaunator.from(pois);
@@ -107,8 +169,12 @@ export function function4(map: any){
         }
 
         showIconLegend(D,[innerIconURL(1),innerIconURL(2),innerIconURL(3)]);
-    })
+    });
 }
+
+
+
+
 
 function distance2ColorIndex(
     distanceIndex: number, // 距离

@@ -59,7 +59,7 @@ function step2(map:any,view:any){
                 let ps2 = convexHull(ps);
                 let ls = new LineString(ps2);
                 let polygon = new Polygon([ls]);
-                drawPolygon2BLMap(polygon, map);
+                drawPolygon2BLMap(polygon, map,{strokeColor:'#FD8A7D',strokeWeight:1,fillColor:"#FFF2C6",fillOpacity:0.2});
             }
 
 

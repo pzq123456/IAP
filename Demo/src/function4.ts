@@ -42,10 +42,10 @@ const extend =
 export function function4(map: any){
 
     createBtnList([
-        {'name': 'step1', 'action': () => step1(map)},
-        {'name': 'step2', 'action': () => step2(map)},
-        {'name': 'step3', 'action': () => step3(map)},
-        {'name': 'step4', 'action': () => step4(map)},
+        {'name': '加载数据', 'action': () => step1(map)},
+        {'name': '计算狄罗妮三角网（及其中心点）', 'action': () => step2(map)},
+        {'name': '根据三角网追踪Voronoi图并裁剪', 'action': () => step3(map)},
+        {'name': '计算到当前点的距离并着色', 'action': () => step4(map)},
         {'name': 'clear', 'action': () => map.clearOverlays()}
     ]);
 }
@@ -132,8 +132,8 @@ function step4(map){ // 计算距离并着色
         // 计算距离
         let D = point2PointsDistance(XMLoc,pois);
         let bgcolor = [
-            '#00FF00',
-            '#FFFF00',
+            '#14b814',
+            '#FFE171',
             '#FF0000'
         ];
 
@@ -144,7 +144,7 @@ function step4(map){ // 计算距离并着色
             // 绘制出 voi 区域并着色
             let tmpPoly = [voi.get(i)];
 
-            drawPolygon2BLMap(tmpPoly,map,{ fillColor: bgcolor[color - 1], fillOpacity: 0.1, strokeColor: bgcolor[color - 1], strokeWeight: 2, strokeOpacity: 0.6 });
+            drawPolygon2BLMap(tmpPoly,map,{ fillColor: bgcolor[color - 1], fillOpacity: 0.15, strokeColor: bgcolor[color - 1], strokeWeight: 2, strokeOpacity: 0.6 });
             // 添加点击事件
             marker.addEventListener('click',function(){
                 // 创建组件

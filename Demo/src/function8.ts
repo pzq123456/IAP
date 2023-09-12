@@ -4,7 +4,21 @@
 import axios from 'axios';
 import * as RV from '../src/packages/rvgeo.js'
 import { drawRaster2BLMap, removeAllOverlay } from './helpers/BLDraw.js';
+import { createBtnList } from './Components/BtnList.js';
 export function function8(
+    map:any
+){
+    createBtnList([
+        {'name': '请求并渲染地形数据', 'action': () => functionStep(map,1)},
+        {'name': '计算水流坡向', 'action': () => functionStep(map,2)},
+        {'name': '计算累计流量', 'action': () => functionStep(map,3)},
+        {'name': 'clear', 'action': () => removeAllOverlay(map)}
+    ]);
+}
+
+
+
+export function functionStep(
     map:any,
     mould : number = 1
     ){
@@ -56,8 +70,6 @@ function mould2(
     myCanvas:HTMLCanvasElement,
     sourceGrid:RV.Raster.Raster
 ){
-    
-
     let grid2 = RV.Raster.fromMatrix(sourceGrid.getFlowDirection());
     let gridview2 = new RV.Renderer.GridView(myCanvas.getContext("2d"),grid2,0,191,297,0);
     gridview2.draw_dispersed_custom(myCanvas.height,true,RV.pan.CellValueRenderer.Stadard_Aspact,"坡向测试视图",9,1,0.1,[0,1,2,4,8,16,32,64,128]);

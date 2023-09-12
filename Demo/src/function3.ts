@@ -26,8 +26,7 @@ export function function3(map: any){
     createBtnList([
         {'name': '加载景点多边形', 'action': () => step1(map)},
         {'name': '加载游客位置', 'action': () => step2(map)},
-        {'name': '渲染多边形并计算游客数量', 'action': () => step3(map)},
-        {'name': '计算游客密度', 'action': () => step4(map)},
+        {'name': '计算景点客流量并展示', 'action': () => step3(map)},
         {'name': '清空地图', 'action': () => map.clearOverlays()}
     ]);
 }
@@ -50,7 +49,7 @@ function step1(map){ //加载数据
 
 function step2(map){
     // load data
-    removeAllOverlay(map);//清空地图
+    
     readDataFromGeoJSON("polygon.json").then((res) => {
         // 向地图上添加景点多边形
         let arr = GeoFeatures2Arr(res.data.features);
@@ -72,7 +71,7 @@ function step2(map){
 }
 
 function step3(map){
-    removeAllOverlay(map);//清空地图
+    
     readDataFromGeoJSON("polygon.json").then((res) => {
         let arr = GeoFeatures2Arr(res.data.features);
         let simPolygons = GeoPolygons2SimpleArr(arr);

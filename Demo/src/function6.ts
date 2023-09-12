@@ -7,9 +7,8 @@ import { removeAllOverlay } from "./helpers/BLDraw";
  * QSF
  */
 export function function6(map: any){
-    console.log("function6");
     // 添加小组件
-    addComPaths(document.querySelector<HTMLDivElement>('#components')!)
+    let com = addComPaths(document.querySelector<HTMLDivElement>('#components')!);
     const points = [
         //0
         [-107.8557944859051, 38.68187126977591],
@@ -47,10 +46,6 @@ export function function6(map: any){
     ] as [number, number][];
 
     let paths_button = document.getElementById("paths_button");
-
-    console.log("paths_button");
-    console.log(paths_button);
-
     paths_button?.addEventListener('click',function(){
         removeAllOverlay(map)
         // 获取源点选项值
@@ -64,14 +59,20 @@ export function function6(map: any){
         let dijkstra = new Dijkstra(EdgesWithWeight, source);
         let [path, length] = dijkstra.dijkstra(target);
         path as number[];
-        console.log(path);
-        drawRoad2Map(points, edges, path, map)
+        // 将path强制转换为number[]
+        path.forEach((value,index,array)=>{
+            array[index] = Number(value)
+        })
 
-        
+        console.log("path");
+        console.log(length);
+        console.log(path);
+        com.addDistanceDiV(Number(source),Number(target),length);
+        drawRoad2Map(points, edges, path, map)        
     })
 
     var all_Paths = Floyd()
-    console.log(all_Paths)
+    // console.log(all_Paths)
     
 }
 
@@ -96,19 +97,15 @@ function addComPaths(
 ){
     // 首先实例化组件
     const pathsCom= new PathsCom(0,1);
-    // 然后将组件添加到页面中
     fatherContainer.appendChild(pathsCom)
+    return pathsCom;
 }
 
 function getSelecValue (selectID:string) {
     // let startValue = document.getElementById("paths_select")
     // 获取<select>标签的引用
     let startSelect = document.querySelector<HTMLDivElement>(selectID);
-
     let selectValue = startSelect?.value;
-    console.log("selectValue")
-    console.log(selectValue)
-
     return selectValue
 }
 

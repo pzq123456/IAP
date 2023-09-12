@@ -56,7 +56,7 @@ createToolBar(document.querySelector<HTMLDivElement>('#toolBar')!, [
   { name: 'LJY', action: () =>  Fun.function5(map,view)},
   { name: 'QSF', action: () =>  Fun.function6(map)},
   { name: 'PZQ', action: () =>  Fun.function7(map)},
-  { name: '栅格', action: () =>  Fun.function8(map,1)},
+  { name: '栅格', action: () =>  Fun.function8(map)},
   { name: '清除组件', action: () =>  removeComponents()},
   { name: 'toggle组件', action: () =>  toggleComponent()},
   { name: '关于', action: () =>  about()},

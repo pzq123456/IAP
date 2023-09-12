@@ -133,8 +133,8 @@ function step4(map){ // 计算距离并着色
         // 计算距离
         let D = point2PointsDistance(XMLoc,pois);
         let bgcolor = [
-            '#00FF00',
-            '#FFFF00',
+            '#14b814',
+            '#FFE171',
             '#FF0000'
         ];
 
@@ -145,7 +145,7 @@ function step4(map){ // 计算距离并着色
             // 绘制出 voi 区域并着色
             let tmpPoly = [voi.get(i)];
 
-            drawPolygon2BLMap(tmpPoly,map,{ fillColor: bgcolor[color - 1], fillOpacity: 0.1, strokeColor: bgcolor[color - 1], strokeWeight: 2, strokeOpacity: 0.6 });
+            drawPolygon2BLMap(tmpPoly,map,{ fillColor: bgcolor[color - 1], fillOpacity: 0.15, strokeColor: bgcolor[color - 1], strokeWeight: 2, strokeOpacity: 0.6 });
             // 添加点击事件
             marker.addEventListener('click',function(){
                 // 创建组件

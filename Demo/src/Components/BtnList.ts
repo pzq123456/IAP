@@ -78,6 +78,8 @@ export function createBtnList(
     btnObjList: { name: string, action: () => void }[],
     fatherContainer: HTMLDivElement = document.querySelector<HTMLDivElement>('#components')!
 ){
+    // clear
+    fatherContainer.innerHTML = '';
     const btnList = new BtnList(btnObjList);
     fatherContainer.appendChild(btnList);
 }

@@ -42,10 +42,10 @@ const extend =
 export function function4(map: any){
 
     createBtnList([
-        {'name': 'step1', 'action': () => step1(map)},
-        {'name': 'step2', 'action': () => step2(map)},
-        {'name': 'step3', 'action': () => step3(map)},
-        {'name': 'step4', 'action': () => step4(map)},
+        {'name': '加载数据', 'action': () => step1(map)},
+        {'name': '计算狄罗妮三角网（及其中心点）', 'action': () => step2(map)},
+        {'name': '根据三角网追踪voironoi图并裁剪', 'action': () => step3(map)},
+        {'name': '计算到当前点的距离并着色', 'action': () => step4(map)},
         {'name': 'clear', 'action': () => map.clearOverlays()}
     ]);
 }

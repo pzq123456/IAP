@@ -10,9 +10,8 @@ import { innerIcon } from "./helpers/BLDraw";
  * QSF
  */
 export function function6(map: any){
-    console.log("function6");
     // 添加小组件
-    addComPaths(document.querySelector<HTMLDivElement>('#components')!)
+    let com = addComPaths(document.querySelector<HTMLDivElement>('#components')!);
     const points = [
         //0
         [-107.8557944859051, 38.68187126977591],
@@ -114,19 +113,15 @@ function addComPaths(
 ){
     // 首先实例化组件
     const pathsCom= new PathsCom(0,1);
-    // 然后将组件添加到页面中
     fatherContainer.appendChild(pathsCom)
+    return pathsCom;
 }
 
 function getSelecValue (selectID:string) {
     // let startValue = document.getElementById("paths_select")
     // 获取<select>标签的引用
     let startSelect = document.querySelector<HTMLDivElement>(selectID);
-
     let selectValue = startSelect?.value;
-    console.log("selectValue")
-    console.log(selectValue)
-
     return selectValue
 }
 

@@ -30,7 +30,7 @@ function clearview(map:any,view:any){
 
 function step1(map:any,view:any){
     //加载数据
-    clearview(map,view);
+    //clearview(map,view);
     let data = [];
     readDataFromGeoJSON("people1.json").then((res) => {
         let pois = GeoFeatures2Arr(res.data.features);

@@ -12,6 +12,7 @@ export function function8(
         {'name': '请求并渲染地形数据', 'action': () => functionStep(map,1)},
         {'name': '计算水流坡向', 'action': () => functionStep(map,2)},
         {'name': '计算累计流量', 'action': () => functionStep(map,3)},
+        {'name': '计算累计流量（二值化）', 'action': () => functionStep(map,4)},
         {'name': 'clear', 'action': () => removeAllOverlay(map)}
     ]);
 }
@@ -45,6 +46,9 @@ export function functionStep(
             case 3:
                 mould3(myCanvas,sourceGrid);
                 break;
+            case 4:
+                mould4(myCanvas,sourceGrid);
+                break;
             default:
                 mould1(myCanvas,sourceGrid);
                 break;
@@ -73,7 +77,6 @@ function mould2(
     let grid2 = RV.Raster.fromMatrix(sourceGrid.getFlowDirection());
     let gridview2 = new RV.Renderer.GridView(myCanvas.getContext("2d"),grid2,0,191,297,0);
     gridview2.draw_dispersed_custom(myCanvas.height,true,RV.pan.CellValueRenderer.Stadard_Aspact,"坡向测试视图",9,1,0.1,[0,1,2,4,8,16,32,64,128]);
-
 }
 
 function mould3(
@@ -86,6 +89,19 @@ function mould3(
     let colorramp2 = new RV.Renderer.ColorRamp(stt2);
     gridview2.draw(colorramp2,myCanvas.height,myCanvas.width,true,"累积流量测试视图（重分类后）");
 }
+
+function mould4(
+    myCanvas:HTMLCanvasElement,
+    sourceGrid: RV.Raster
+){
+    let grid2 = RV.Raster.fromMatrix(sourceGrid.getAccumulationFlow());
+    grid2.reClassify_Binary_(100);
+    let gridview2 = new RV.Renderer.GridView(myCanvas.getContext("2d"),grid2,0,191,297,0);
+    let stt2 =new RV.Stastic(grid2.get1DArray());
+    let colorramp2 = new RV.Renderer.ColorRamp(stt2);
+    gridview2.draw(colorramp2,myCanvas.height,myCanvas.width,true,"累积流量测试视图（重分类后）");
+}
+
 
 
 

@@ -122,17 +122,21 @@ export function SpherePolygonArea(
     let area = 0;
     let len = coordinates.length;
     let radiusArr = [];
-    for(let i = 0 ; i < len ; i++){
-        let tmp = coordinates[i];
-        let r1 = degreesToRadians(tmp[1]);
-        let r2 = degreesToRadians(tmp[0]);
-        radiusArr.push([r1,r2]);
+
+    // 将经纬度转换为弧度 不使用 forEach 是因为需要将经纬度转换为弧度后再计算
+    for (let i = 0; i < len; i++) {
+        radiusArr.push([]);
+        for (let j = 0; j < 2; j++) {
+            radiusArr[i].push(degreesToRadians(coordinates[i][j]));
+        }
     }
+
     for (let i = 0; i < len; i++) {
         let j = (i + 1) % len;
         let k = (i + 2) % len;
         area += (radiusArr[i][0] - radiusArr[k][0]) * Math.sin(radiusArr[j][1]);
     }
+
     area = (area * RADIUS * RADIUS) / 2;
     // 转换为指定单位
     area = area * areaFactors[unit];

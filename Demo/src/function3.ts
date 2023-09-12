@@ -35,7 +35,7 @@ export function function3(map: any){
 
 function step1(map){ //加载数据
     // load data
-    removeAllOverlay(map);//清空地图
+    //removeAllOverlay(map);//清空地图
     readDataFromGeoJSON("polygon.json").then((res) => {
         // 向地图上添加景点多边形
         let arr = GeoFeatures2Arr(res.data.features);

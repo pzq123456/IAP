@@ -77,6 +77,33 @@ export function drawPoint2BLMap(point: Point | [lon:number,lat:number] , map: an
         return marker;
     }
 }
+/**
+ * 在百度地图上点位置添加label标注
+ * @param point - 点或者经纬度数组 [lon, lat]
+ * @param content -标注的内容
+ * @param map - 百度地图实例
+ * @returns label - 百度地图的 标注对象
+ */
+export function drawLabel(point: Point | [lon: number, lat: number], content: string | number, map: any){
+    // let content = "label";
+    let blPoint = Point.isPoint(point) ? new BMapGL.Point(point.lon, point.lat) : new BMapGL.Point(point[0], point[1]);
+    let label = new BMapGL.Label(content, {       // 创建文本标注
+        position: blPoint,                          // 设置标注的地理位置
+        offset: new BMapGL.Size(5, 5)           // 设置标注的偏移量
+    })
+    label.setStyle({
+        // color: 'blue',
+        borderRadius: '50px',
+        borderColor: '#ccc',
+        padding: '10px',
+        fontSize: '16px',
+        height: '30px',
+        lineHeight: '30px',
+        fontFamily: '微软雅黑'
+    });
+    map.addOverlay(label);
+    return label
+}
 
 /**
  * 清除百度地图上所有的覆盖物

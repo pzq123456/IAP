@@ -25,7 +25,7 @@ export class Dijkstra {
             prev = {},
             // 存放所有起点到其他点的权重
             dist = {},
-            // 存放邻居节点
+            // 声明空邻接矩阵
             adj = {}
 
         const vertex_with_min_dist = (Q, dist) => {

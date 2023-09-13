@@ -1,4 +1,4 @@
-import { drawRoad2Map } from "./helpers/BLDraw";
+import { drawRoad2Map,drawLabel } from "./helpers/BLDraw";
 import { Dijkstra } from "./packages/Dijkstra";
 import { haversine } from "./packages/Distance";
 import { PathsCom } from "./Components/Paths";
@@ -36,6 +36,8 @@ export function function6(map: any){
 
     const edges = [
         [0, 1],
+        [0, 7],
+        [0, 8],
         [1, 6],
         [2, 5],
         [2, 6],
@@ -43,18 +45,25 @@ export function function6(map: any){
         [3, 5],
         [3, 8],
         [4, 5],
+        [4, 7],
+        [4, 8],
         
     ] as [number, number][];
     
     var EdgesWithWeight = addDistance2Edge(points, edges, haversine);
-
+    // 初始化路网
+    initRoadnet(points, EdgesWithWeight, edges, map)
     let dijkstra_button = document.getElementById("dijkstra_button");
     let floyd_button = document.getElementById("floyd_button");
     
     console.log(floyd_button);
-
     dijkstra_button?.addEventListener('click',function(){
         removeAllOverlay(map)
+        for(let i=0;i<points.length;i++){
+            console.log(points[i])
+            drawLabel(points[i], "顶点" +i, map)
+            
+        }
         
         // 获取源点选项值
         var source = getSelecValue('#paths_selectSource')
@@ -81,7 +90,7 @@ export function function6(map: any){
         let floyd = new Floyd_Warshall(9, EdgesWithWeight)
         let paths:any[] = floyd.floyd_warshall()
         console.log(paths[source])
-        
+        paths[source].splice(0, 1)
         // drawRoad2Map(points, edges, paths[source], map, innerIcon(0), Object = { strokeColor: "blue", strokeWeight: 2, strokeOpacity: 0.5 },)
         for(let i=0;i<paths[source].length;i++){
             // let color:any = setRandomColor(paths[source].length)
@@ -92,11 +101,26 @@ export function function6(map: any){
 
     })
 
-    
-    
-    
-}
 
+}
+/**
+ * 初始化路网
+ * @param points -顶点位置
+ * @param EdgesWithWeight -边权重表-格式：[0,1,6]-0为源点 1为目标点 6为该边的权重
+ * @param edges -边表-格式：[0,1]-0为源点 1为目标点 6为该边的权重
+ * @param map -百度地图map对象
+ */
+function initRoadnet(points:any,EdgesWithWeight:number[][],edges:any,map:any){
+    // 获取源点选项值
+    var source = getSelecValue('#paths_selectSource')
+    // 获取目标点选项值
+    var target = getSelecValue('#paths_selectTarget')
+    let dijkstra = new Dijkstra(EdgesWithWeight, source);
+    let [path, length] = dijkstra.dijkstra(target);
+    path as number[];
+    drawRoad2Map(points, edges, path, map)
+
+}
 function addDistance2Edge(
     points: [number,number][],
     edges: [number,number][],

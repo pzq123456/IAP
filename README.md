@@ -1,5 +1,7 @@
 # 智慧景区平台 (Intelligent Attraction Platform)
-
+> 实习结束。2023.6.27-->2023.9.13
+> - 感谢！
+> - ![](Demo\src\Components\start.jpg)
 ## 快速访问
 - [大四上学期合作文档](/docs/业务代码.md)
 - [最新开发文件夹Demo](/Demo)

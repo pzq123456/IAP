@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "vite build --base=/IAP/",
     "preview": "vite preview",
     "test": "vitest",
     "coverage": "vitest run --coverage"

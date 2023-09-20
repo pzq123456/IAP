@@ -71,4 +71,3 @@ B --> N[景区票务管理]
 - 后端：
   - 后端框架：Fastapi + SQLAlchemy
   - 数据库：SQLite
-

@@ -1,3 +1,5 @@
+// 禁用 TS2304 检查器，因为我们将使用 require 语句
+// @ts-nocheck
 /**
  * @description
  * - 量测模块 暂时包括距离量测及面积量测

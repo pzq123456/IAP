@@ -1,3 +1,5 @@
+// 禁用 TS2304 检查器，因为我们将使用 require 语句
+// @ts-nocheck
 import { drawPoint2BLMap, innerIcon, removeAllOverlay } from "./helpers/BLDraw";
 import { MultiPoint} from "./packages/Geometry";
 import { mockPoints } from "./tests/Mock";

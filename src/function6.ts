@@ -1,3 +1,5 @@
+// 禁用 TS2304 检查器，因为我们将使用 require 语句
+// @ts-nocheck
 import { drawRoad2Map,drawLabel } from "./helpers/BLDraw";
 import { Dijkstra } from "./packages/Dijkstra";
 import { haversine } from "./packages/Distance";

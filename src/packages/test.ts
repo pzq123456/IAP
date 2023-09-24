@@ -1,3 +1,5 @@
+// 禁用 TS2304 检查器，因为我们将使用 require 语句
+// @ts-nocheck
 export class Floyd_Warshall{
     n: number
     edge: any[][]

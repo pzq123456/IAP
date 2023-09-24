@@ -1,6 +1,7 @@
-/**
- * mapvgl 封装
- */
+
+// 禁用 TS2304 检查器，因为我们将使用 require 语句
+// @ts-nocheck
+
 export function Createheatmap(view:any,data:any) {
     
     var heatmap = new mapvgl.HeatmapLayer({

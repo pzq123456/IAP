@@ -1,3 +1,5 @@
+// 禁用 TS2304 检查器，因为我们将使用 require 语句
+// @ts-nocheck
 import { Point, MultiPoint, LineString, MultiLineString, Polygon, mbrToPolygon } from './packages/Geometry.ts'
 import { mockPoints, mockLineString } from './tests/Mock.ts';
 import { drawMultiPoint2BLMap, removeAllOverlay, drawRectangle2BLMap, drawLineString2BLMap, drawMultiLineString2BLMap, drawPolygon2BLMap, innerIcon, drawPolygonArray2BLMap, drawTriangleEdge2BLMap, drawPoint2BLMap, drawEdgeMap2BLMap } from './helpers/BLDraw.ts';

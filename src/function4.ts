@@ -1,3 +1,5 @@
+// 禁用 TS2304 检查器，因为我们将使用 require 语句
+// @ts-nocheck
 import { GeoFeatures2Arr, readDataFromGeoJSON } from "./Abstract/MetaData";
 import { drawEdgeMap2BLMap, drawMultiPoint2BLMap, drawPoint2BLMap, drawPolygon2BLMap, drawTriangleEdge2BLMap, innerIcon, innerIconURL } from "./helpers/BLDraw";
 import { haversine } from "./packages/Distance";

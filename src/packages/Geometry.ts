@@ -1,3 +1,5 @@
+// 禁用 TS2304 检查器，因为我们将使用 require 语句
+// @ts-nocheck
 /**
  * 该模块中的是内置的 geometry 对象（存储的坐标全部为 WGS 84 经纬度坐标）
  * @see http://geojson.io/

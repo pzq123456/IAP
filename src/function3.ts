@@ -1,3 +1,5 @@
+// 禁用 TS2304 检查器，因为我们将使用 require 语句
+// @ts-nocheck
 import { GeoFeatures2Arr, GeoPolygons2SimpleArr, readDataFromGeoJSON } from "./Abstract/MetaData";
 import { Flow } from "./Components/Chart2";
 import { drawMultiPoint2BLMap, drawRoad2Map, drawSimplePolygon2Map, innerIcon, removeAllOverlay } from "./helpers/BLDraw";

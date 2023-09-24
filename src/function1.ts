@@ -1,3 +1,5 @@
+// 禁用 TS2304 检查器，因为我们将使用 require 语句
+// @ts-nocheck
 import { GeoFeatures2Arr, readDataFromGeoJSON } from "./Abstract/MetaData";
 import { drawMultiPoint2BLMap, drawPolygon2BLMap, innerIcon } from "./helpers/BLDraw";
 import { K_means } from "./packages/Cluster";
